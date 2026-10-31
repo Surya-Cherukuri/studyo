@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studyo · See the idea move</title>
+<meta name="description" content="Free one-minute visual lessons in maths, physics, chemistry, coding and system design, drawn step by step by our own animation engine.">
+<meta property="og:title" content="Studyo · See the idea move">
+<meta property="og:description" content="Free one-minute visual lessons in maths, physics, chemistry, coding and system design.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='7' y='4' width='18' height='7' rx='3' fill='%23C9533A'/%3E%3Crect x='4' y='13' width='24' height='7' rx='3' fill='%23B7791F'/%3E%3Crect x='4' y='22' width='24' height='7' rx='3' fill='%23168A8F'/%3E%3C/svg%3E">
+<style>html { color-scheme: light; } body { margin: 0; } img { max-width: 100%; } [hidden] { display: none !important; }</style>
+<script src="videos.js"></script>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a shelf of phones. The hero holds one lesson playing in a phone frame; lessons sit as portrait cards in two shelves; the stacked-block mark is the one flourish. */
+:root {
+  --paper: #F4F6FA; --surface: #FFFFFF; --sunk: #E9EEF6; --ink: #14213D; --muted: #5E6B85; --line: #D8DFEB;
+  --sapphire: #2B58A6; --sapphire-ink: #FFFFFF; --teal: #168A8F; --gold: #B7791F; --terra: #C9533A;
+  --phone: #0F1729; --shadow: 0 18px 40px -22px rgba(20, 33, 61, .45);
+  --nv-bg: #0B1222; --nv-panel: #121C33; --nv-ink: #E8EEF9; --nv-muted: #9AA8C3; --nv-line: rgba(160, 186, 235, .16); --nv-grid: rgba(122, 162, 238, .09);
+  --nv-accent: #7AA2EE; --nv-teal: #3DB6BA; --nv-gold: #E2A64B; --nv-terra: #EC8468;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0D1424; --surface: #151F35; --sunk: #1B2742; --ink: #E7ECF6; --muted: #9AA7C0; --line: #26324D;
+  --sapphire: #7AA2EE; --sapphire-ink: #0D1424; --teal: #3DB6BA; --gold: #E2A64B; --terra: #EC8468;
+  --phone: #050A16; --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8); color-scheme: dark;
+  --nv-bg: #060A15; --nv-panel: #0F182C; --nv-line: rgba(160, 186, 235, .18); --nv-grid: rgba(122, 162, 238, .11);
+} }
+:root[data-theme="dark"] {
+  --paper: #0D1424; --surface: #151F35; --sunk: #1B2742; --ink: #E7ECF6; --muted: #9AA7C0; --line: #26324D;
+  --sapphire: #7AA2EE; --sapphire-ink: #0D1424; --teal: #3DB6BA; --gold: #E2A64B; --terra: #EC8468;
+  --phone: #050A16; --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8); color-scheme: dark;
+  --nv-bg: #060A15; --nv-panel: #0F182C; --nv-line: rgba(160, 186, 235, .18); --nv-grid: rgba(122, 162, 238, .11);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--sapphire); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+.kicker { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+:focus-visible { outline: 3px solid var(--sapphire); outline-offset: 3px; border-radius: 10px; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 22px; }
+.mark { display: grid; gap: 3px; width: 26px; }
+.mark i { display: block; height: 7px; border-radius: 3px; }
+.mark i:nth-child(1) { background: var(--terra); width: 70%; margin-left: 15%; }
+.mark i:nth-child(2) { background: var(--gold); }
+.mark i:nth-child(3) { background: var(--teal); }
+nav { display: flex; gap: 6px 18px; align-items: center; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 15px; }
+nav a:hover { color: var(--ink); }
+nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px; border-radius: 999px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 48px; align-items: center; padding-block: 40px 72px; }
+.hero h1 { font-size: clamp(48px, 8vw, 92px); font-weight: 800; }
+.hero h1 .move { display: inline-block; background: var(--sapphire); color: var(--sapphire-ink); padding: 0 .18em .04em; border-radius: .16em; box-shadow: 0 .08em 0 color-mix(in srgb, var(--sapphire) 55%, #000); }
+.lede { font-size: 20px; color: var(--muted); max-width: 34em; margin-top: 22px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 700 17px/1 var(--body); padding: 15px 22px; border-radius: 14px; text-decoration: none; border: 0; cursor: pointer; }
+.btn.primary { background: var(--sapphire); color: var(--sapphire-ink); box-shadow: 0 4px 0 color-mix(in srgb, var(--sapphire) 55%, #000); }
+.btn.primary:hover { transform: translateY(-1px); }
+.btn.ghost { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.facts b { color: var(--ink); }
+
+.phone-col { display: grid; justify-items: center; gap: 14px; }
+.phone { position: relative; width: min(300px, 100%); aspect-ratio: 9 / 16; background: var(--phone); border-radius: 38px; padding: 10px; box-shadow: var(--shadow); max-width: 100%; }
+.phone video { width: 100%; height: 100%; object-fit: cover; border-radius: 29px; display: block; background: #fff; }
+.sound { font: 700 14px/1 var(--body); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+.phone-cap { font-size: 14px; color: var(--muted); text-align: center; }
+
+/* shelves */
+.band { padding-block: 64px; }
+.band.alt { background: var(--sunk); }
+.head { display: grid; gap: 10px; margin-bottom: 30px; max-width: 46em; }
+.head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; }
+.head p { color: var(--muted); font-size: 18px; }
+.shelf + .shelf { margin-top: 52px; }
+.shelf-title { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+.shelf-title h3 { font-size: 26px; font-weight: 800; }
+.count { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.shelf > p { color: var(--muted); margin-bottom: 20px; max-width: 46em; }
+.grid { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: 22px 16px; }
+.card { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.tile { position: relative; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); padding: 0; cursor: pointer; box-shadow: var(--shadow); width: 100%; max-width: 100%; }
+.tile img, .tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tile .play { position: absolute; left: 50%; top: 46%; translate: -50% -50%; width: 54px; height: 54px; border-radius: 50%; background: var(--sapphire); display: grid; place-items: center; box-shadow: 0 6px 18px -6px rgba(0,0,0,.5); transition: scale .15s; }
+.tile .play::after { content: ""; border-left: 17px solid var(--sapphire-ink); border-top: 11px solid transparent; border-bottom: 11px solid transparent; margin-left: 5px; }
+.tile:hover .play { scale: 1.08; }
+.tile .len { position: absolute; right: 8px; top: 8px; font: 700 12px/1 var(--mono); background: rgba(15, 23, 41, .78); color: #fff; padding: 5px 7px; border-radius: 7px; font-variant-numeric: tabular-nums; }
+.card .k, .long .k { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.card .k.cs { color: var(--sapphire); } .card .k.ma { color: var(--terra); }
+.card h4, .long h4 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 18px; line-height: 1.15; }
+.card .sub { color: var(--muted); font-size: 15px; line-height: 1.4; }
+.lengths { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 48px; }
+.len-item { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.len-item .t { font-family: var(--mono); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.len-item .bar { height: 8px; border-radius: 4px; background: var(--sunk); overflow: hidden; }
+.len-item .bar i { display: block; height: 100%; border-radius: 4px; }
+.len-item h4 { margin: 4px 0 0; font-family: var(--display); font-weight: 800; font-size: 18px; }
+.len-item p { color: var(--muted); font-size: 15px; line-height: 1.45; }
+.wide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.long { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.ltile { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); display: grid; align-content: space-between; padding: 20px; text-decoration: none; color: var(--ink); max-width: 100%; width: 100%; cursor: pointer; font: inherit; text-align: left; }
+.ltile .stripe { position: absolute; inset: 0 auto 0 0; width: 10px; }
+.ltile .lk { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-left: 8px; }
+.ltile .lt { font-family: var(--display); font-weight: 800; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.1; padding-left: 8px; text-wrap: balance; }
+.ltile .lrow { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-left: 8px; flex-wrap: wrap; }
+.ltile .ldur { font: 700 15px/1 var(--mono); background: var(--sunk); padding: 7px 10px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.ltile .lgo { font-weight: 700; color: var(--sapphire); }
+.ltile img, .ltile iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.ltile.thumb .play { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 64px; height: 64px; border-radius: 50%; background: var(--sapphire); display: grid; place-items: center; box-shadow: 0 6px 18px -6px rgba(0,0,0,.5); }
+.ltile.thumb .play::after { content: ""; border-left: 20px solid var(--sapphire-ink); border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
+.ltile.thumb .ldur { position: absolute; right: 10px; bottom: 10px; background: rgba(15, 23, 41, .82); color: #fff; }
+.long .sub { color: var(--muted); font-size: 15px; line-height: 1.45; }
+.next { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 40px; }
+.soon-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.soon { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.soon h3 { font-size: 24px; font-weight: 800; }
+.soon > p { color: var(--muted); font-size: 16px; }
+.badge { justify-self: start; font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); border: 1.5px solid var(--gold); padding: 5px 8px; border-radius: 7px; margin-top: 6px; }
+.mock { background: var(--sunk); border-radius: 16px; padding: 16px; display: grid; gap: 8px; min-height: 236px; align-content: center; }
+.mock.quiz .q { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+.mock.quiz span { font-size: 14px; font-weight: 700; background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 7px 12px; }
+.mock.quiz span.right { border-color: var(--teal); color: var(--teal); }
+.mock.cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+.fc { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 8px; align-content: space-between; min-height: 132px; box-shadow: 0 6px 14px -10px rgba(20, 33, 61, .5); }
+.fc.back { border-color: var(--sapphire); transform: rotate(2deg); }
+.fc .side { font: 700 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.fc b { font-family: var(--display); font-size: 16px; line-height: 1.2; }
+.fc.back b { color: var(--sapphire); font-size: 20px; }
+.mock.chat p { font-size: 14px; line-height: 1.4; padding: 9px 12px; border-radius: 14px; max-width: 88%; }
+.mock.chat .me { justify-self: end; background: var(--sapphire); color: var(--sapphire-ink); border-bottom-right-radius: 4px; }
+.mock.chat .bot { justify-self: start; background: var(--surface); border: 1.5px solid var(--line); border-bottom-left-radius: 4px; }
+.soon-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.soon-list > div { border: 1.5px dashed var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.soon-list > div.ask { border-style: solid; background: var(--surface); }
+.soon-list h4 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 17px; line-height: 1.2; }
+.soon-list p { color: var(--muted); font-size: 15px; line-height: 1.45; }
+.next span.ask { border-style: solid; color: var(--ink); }
+.next span { font-size: 15px; font-weight: 700; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1.5px dashed var(--line); color: var(--muted); }
+
+/* how */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.step .n { font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--teal); }
+.step h3 { font-size: 22px; font-weight: 800; }
+.step p { color: var(--muted); font-size: 16px; }
+
+/* engine */
+.engine { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "copy console" "signup console"; gap: 30px 48px; align-items: start; }
+.engine-copy { grid-area: copy; } .engine .console { grid-area: console; } .engine .signup { grid-area: signup; }
+.engine ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+.engine li { display: flex; gap: 12px; align-items: baseline; }
+.engine li::before { content: ""; flex: none; width: 12px; height: 12px; border-radius: 3px; background: var(--gold); translate: 0 1px; }
+.signup { background: var(--surface); border: 1.5px solid var(--line); border-radius: 24px; padding: 28px; display: grid; gap: 16px; box-shadow: var(--shadow); }
+.signup h3 { font-size: 24px; font-weight: 800; }
+.signup .who { display: flex; flex-wrap: wrap; gap: 8px; }
+.signup .who span { font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--sunk); }
+.signup .fine { font-size: 14px; color: var(--muted); }
+.btn[aria-disabled="true"] { opacity: .55; cursor: default; box-shadow: none; transform: none; }
+
+
+/* the engine band: a deep navy "product" section with a faint grid, the stacked-block mark and a settings console */
+.engine-band { background: var(--nv-bg); color: var(--nv-ink); position: relative; overflow: hidden; border-block: 1px solid var(--nv-line); }
+.engine-band::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--nv-grid) 1px, transparent 1px), linear-gradient(90deg, var(--nv-grid) 1px, transparent 1px); background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 72% 40%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 72% 40%, #000 10%, transparent 75%); }
+.engine-band .wrap { position: relative; }
+.motif { position: absolute; right: max(16px, 4vw); bottom: 40px; display: grid; gap: 7px; width: 150px; opacity: .22; pointer-events: none; }
+.motif i { display: block; height: 18px; border-radius: 6px; }
+.motif i:nth-child(1) { background: var(--nv-terra); width: 70%; margin-left: 15%; } .motif i:nth-child(2) { background: var(--nv-gold); } .motif i:nth-child(3) { background: var(--nv-teal); }
+.engine-band .kicker { color: var(--nv-muted); }
+.engine-band h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; margin-top: 10px; color: var(--nv-ink); }
+.engine-band .lede { color: var(--nv-muted); margin-top: 18px; }
+.engine-band li { color: var(--nv-ink); }
+.engine-band li::before { background: var(--nv-gold); }
+.engine-band :focus-visible { outline-color: var(--nv-accent); }
+.engine-band .signup { background: var(--nv-panel); border-color: var(--nv-line); box-shadow: none; }
+.engine-band .signup h3 { color: var(--nv-ink); }
+.engine-band .signup .who span { background: rgba(160, 186, 235, .10); color: var(--nv-ink); }
+.engine-band .signup .fine { color: var(--nv-muted); }
+.engine-band .btn.primary { background: var(--nv-accent); color: #0B1222; box-shadow: 0 4px 0 #3D63AE; }
+.console { background: var(--nv-panel); border: 1px solid var(--nv-line); border-radius: 22px; overflow: hidden; min-width: 0;
+  box-shadow: 0 0 0 1px rgba(122, 162, 238, .08), 0 0 60px -20px rgba(122, 162, 238, .35), 0 30px 60px -30px rgba(0, 0, 0, .8); }
+.console-top { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--nv-line); font: 700 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--nv-muted); }
+.console-top .dots { display: flex; gap: 6px; } .console-top .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--nv-line); }
+.console-top .demo { margin-left: auto; color: var(--nv-gold); border: 1px solid var(--nv-gold); padding: 4px 7px; border-radius: 6px; font-size: 10px; }
+.console .row { display: grid; grid-template-columns: 5.6em minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--nv-line); }
+.console .lab { font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--nv-muted); }
+.console .topic { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--nv-ink); background: rgba(160, 186, 235, .07); border: 1px solid var(--nv-line); border-radius: 10px; padding: 8px 12px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { display: inline-flex; align-items: center; gap: 7px; font: 700 13px/1 var(--body); color: var(--nv-muted); background: transparent; border: 1px solid var(--nv-line); border-radius: 999px; padding: 8px 12px; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+.seg button:hover { color: var(--nv-ink); }
+.seg button[aria-pressed="true"] { color: #fff; background: rgba(122, 162, 238, .18); border-color: var(--nv-accent); box-shadow: 0 0 18px -6px rgba(122, 162, 238, .8); }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.sw-min { background: #F4F6FA; } .sw-wb { background: #fff linear-gradient(rgba(43, 88, 166, .5) 1px, transparent 1px) 0 0 / 4px 4px; } .sw-brand { background: linear-gradient(135deg, var(--nv-terra), var(--nv-accent)); }
+.ar { display: inline-block; border: 1.5px solid currentColor; border-radius: 2px; } .ar-916 { width: 9px; height: 15px; } .ar-169 { width: 17px; height: 10px; }
+.pace { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+.pace .end { font-size: 12px; color: var(--nv-muted); }
+.pace input { width: 100%; accent-color: var(--nv-accent); }
+.pace output { font: 700 14px/1 var(--mono); color: var(--nv-ink); background: rgba(122, 162, 238, .14); border-radius: 6px; padding: 5px 7px; font-variant-numeric: tabular-nums; }
+.summary { font: 500 13px/1.5 var(--mono); color: var(--nv-teal); padding: 14px 18px 4px; }
+.console-note { font-size: 13px; color: var(--nv-muted); padding: 0 18px 16px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 32px 48px; color: var(--muted); font-size: 15px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+@media (max-width: 860px) {
+  .hero, .engine { grid-template-columns: minmax(0, 1fr); }
+  .engine { grid-template-areas: "copy" "console" "signup"; }
+  .hero { gap: 36px; padding-block: 20px 56px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .lengths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .soon-grid { grid-template-columns: minmax(0, 1fr); }
+  .soon-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) { .soon-list { grid-template-columns: minmax(0, 1fr); } .console .row { grid-template-columns: minmax(0, 1fr); gap: 8px; } .pace { grid-template-columns: minmax(0, 1fr) auto; } .pace .end { display: none; } .motif { display: none; } }
+@media (max-width: 620px) { .wide { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1000px) {   /* a shelf you swipe: every lesson stays in one row, nothing sits alone */
+  .grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 12px; overscroll-behavior-x: contain; }
+  .card { flex: 0 0 152px; scroll-snap-align: start; }
+}
+@media (max-width: 440px) { .card h4 { font-size: 16px; } .lede { font-size: 18px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .btn.primary:hover { transform: none; } }
+</style>
+
+<header class="wrap top">
+  <a class="brand" href="#top" aria-label="Studyo home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Studyo</a>
+  <nav aria-label="Sections">
+    <a href="#lessons">Lessons</a>
+    <a href="#soon">Coming soon</a>
+    <a href="#how">How it's made</a>
+    <a href="#engine">For teachers and creators</a>
+    <a class="yt" href="https://www.youtube.com/@studyo-m9f" target="_blank" rel="noopener">YouTube</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="wrap hero">
+    <div>
+      <p class="kicker">Free visual lessons · maths, physics, chemistry, coding, system design</p>
+      <h1 style="margin-top:14px">See the idea <span class="move">move.</span></h1>
+      <p class="lede">Each lesson builds one idea on screen, step by step: a one-minute short, a few-minute lesson, or a full walkthrough. For students up to grade 12, anyone learning to code, and anyone preparing for a system design interview.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#lessons">Watch the lessons</a>
+        <a class="btn ghost" href="#engine">Make your own</a>
+      </div>
+      <p class="facts"><span><b>15</b> lessons here</span><span>from <b>1-minute</b> shorts</span><span>to <b>15-minute</b> walkthroughs</span><span>up to <b>60 minutes</b> when a topic needs it</span></p>
+    </div>
+    <div class="phone-col">
+      <div class="phone"><video id="hero-video" src="videos/cs-5-bfs.mp4" poster="posters/cs-5-bfs.jpg" autoplay muted loop playsinline aria-label="Breadth-first search lesson playing"></video></div>
+      <button class="sound" id="hero-sound" type="button" aria-pressed="false">Turn sound on</button>
+      <p class="phone-cap">Breadth-first search, 46 seconds</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="lessons">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Lessons</p>
+        <h2>Pick an idea. Watch it happen.</h2>
+        <p>Tap a lesson to play it here. The pictures run the real thing: a real stack, a real search, real forces.</p>
+      </div>
+
+      <div class="lengths" aria-label="Lesson lengths">
+        <div class="len-item"><span class="t">~1 min</span><span class="bar"><i style="width:4%;background:var(--teal)"></i></span><h4>Shorts</h4><p>One idea, start to finish. Made for your phone.</p></div>
+        <div class="len-item"><span class="t">3–6 min</span><span class="bar"><i style="width:10%;background:var(--gold)"></i></span><h4>Lessons</h4><p>A whole topic, like simple harmonic motion or the sliding window.</p></div>
+        <div class="len-item"><span class="t">10–15 min</span><span class="bar"><i style="width:25%;background:var(--terra)"></i></span><h4>Walkthroughs</h4><p>A full LeetCode problem or exam question, every step shown.</p></div>
+        <div class="len-item"><span class="t">Up to 60 min</span><span class="bar"><i style="width:100%;background:linear-gradient(90deg,var(--terra),var(--sapphire))"></i></span><h4>Full length</h4><p>A whole system design interview or textbook chapter in one video, with chapters to jump between.</p></div>
+      </div>
+
+      <div class="shelf">
+        <div class="shelf-title"><h3>Lessons</h3><span class="count">2 lessons · 3–4 min each · new on YouTube</span></div>
+        <p>A full topic in a few minutes. Walkthroughs of 10 to 15 minutes and full-length lessons of up to an hour are on the way.</p>
+        <div class="wide" data-long></div>
+      </div>
+
+      <div class="shelf">
+        <div class="shelf-title"><h3>Computer Science in 60 Seconds</h3><span class="count">6 lessons</span></div>
+        <p>Data structures and algorithms, each ending with a few lines of Python.</p>
+        <div class="grid" data-shelf="cs" style="--n:6"></div>
+      </div>
+
+      <div class="shelf">
+        <div class="shelf-title"><h3>Maths Proved with Physics</h3><span class="count">7 lessons</span></div>
+        <p>Weights, strings, water and light do the algebra. Ideas from Mark Levi's book <i>The Mathematical Mechanic</i>, explained in our own words.</p>
+        <div class="grid" data-shelf="ma" style="--n:7"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band" id="soon">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Coming soon</p>
+        <h2>Watch it, then make it stick.</h2>
+        <p>Each lesson will come with a quick quiz, flash cards and a bot you can ask about any step. More lessons and subjects are on the way too.</p>
+      </div>
+      <div class="soon-grid">
+        <article class="soon">
+          <div class="mock quiz" aria-hidden="true">
+            <p class="q">Undo in a text editor keeps your edits in a…</p>
+            <span>Queue</span><span class="right">Stack ✓</span><span>Hash table</span>
+          </div>
+          <span class="badge">Coming soon</span>
+          <h3>Quizzes</h3>
+          <p>Three quick questions after each lesson, so you know it stuck before you move on.</p>
+        </article>
+        <article class="soon">
+          <div class="mock cards" aria-hidden="true">
+            <div class="fc"><span class="side">Front</span><b>Binary search on 1,000,000 sorted numbers</b></div>
+            <div class="fc back"><span class="side">Back</span><b>About 20 looks</b></div>
+          </div>
+          <span class="badge">Coming soon</span>
+          <h3>Flash cards</h3>
+          <p>The key facts from every lesson on cards you can flip: formulas, definitions, how fast each method is.</p>
+        </article>
+        <article class="soon">
+          <div class="mock chat" aria-hidden="true">
+            <p class="me">Why does recursion need a base case?</p>
+            <p class="bot">Without one the calls never stop and the stack overflows. Watch 0:33 of the Recursion lesson.</p>
+          </div>
+          <span class="badge">Coming soon</span>
+          <h3>Doubt Bot</h3>
+          <p>Stuck on a step? Ask Doubt Bot about the lesson you just watched and get a plain-words answer.</p>
+        </article>
+      </div>
+      <div class="soon-list">
+        <div><h4>Competitive and entrance exams</h4><p>JEE Main and Advanced, the SAT, and other exams in the US and around the world, solved one step at a time.</p></div>
+        <div><h4>Real interview questions</h4><p>A video explanation for each coding interview question, plus a code editor to write and run your own solution.</p></div>
+        <div><h4>System design interviews</h4><p>A whole interview, from requirements to deep dives, in one video.</p></div>
+        <div class="ask"><h4>More subjects</h4><p>Added based on what you ask for. <a id="soon-ask" href="#engine">Tell us what you want next</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="how">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">How it's made</p>
+        <h2>Every frame is drawn, not filmed.</h2>
+        <p>Our own animation engine draws each lesson from a script, so the picture always matches what the narrator says.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">Step 1</span><h3>One idea, one line at a time</h3><p>The script is written like a teacher talking to one student: a question, the idea built in small moves, one worked example, a recap. It's written with AI help and checked by a person.</p></div>
+        <div class="step"><span class="n">Step 2</span><h3>Pictures that compute</h3><p>The figures run the actual algorithm or the actual physics. The breadth-first search numbers come from a real search, and the doughnut's 395 cm³ is worked out, not typed in.</p></div>
+        <div class="step"><span class="n">Step 3</span><h3>Voice, sound, then a check</h3><p>A narrator voice, music and sound effects go on, then an automatic check looks for words that overlap or run off the screen before a lesson is published.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band engine-band" id="engine">
+    <div class="motif" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap engine">
+      <div class="engine-copy">
+        <p class="kicker">For teachers, tutors, creators and developers</p>
+        <h2>Make lessons like these from your own topic.</h2>
+        <p class="lede">We're turning the engine behind these videos into a tool. You give it a topic, make it yours, check the script, and get a finished lesson. We're opening it to a small group first.</p>
+        <ul>
+          <li>From a 1-minute short to a 60-minute lesson with chapters</li>
+          <li>Your voice, narration pace, teaching style and look</li>
+          <li>Maths, physics, chemistry, code and system design for now, with more subjects as people ask for them</li>
+          <li>You read and approve the script before anything is made</li>
+        </ul>
+      </div>
+      <div class="signup">
+          <h3>Join the engine waitlist</h3>
+          <div class="who" aria-label="Who it's for"><span>Teacher</span><span>Tutor</span><span>Creator</span><span>Developer</span><span>Student</span></div>
+          <a class="btn primary" id="waitlist-btn" href="#engine" target="_blank" rel="noopener">Join the waitlist</a>
+          <p class="fine" id="waitlist-note">We only use your email to tell you about the engine.</p>
+        </div>
+      <div class="console" aria-label="Lesson settings, a preview">
+        <div class="console-top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>New lesson</span><span class="demo">Preview</span></div>
+        <div class="row"><span class="lab">Topic</span><div class="topic">Why does ice float on water?</div></div>
+        <div class="row" data-group="voice"><span class="lab">Voice</span><div class="seg"><button type="button" aria-pressed="true">Warm female</button><button type="button" aria-pressed="false">Calm male</button><button type="button" aria-pressed="false">More voices</button></div></div>
+        <div class="row"><span class="lab"><label for="pace">Pace</label></span><div class="pace"><span class="end">Slower</span><input type="range" id="pace" min="0.8" max="1.3" step="0.05" value="1"><span class="end">Faster</span><output id="pace-out" for="pace">1.0×</output></div></div>
+        <div class="row" data-group="style"><span class="lab">Style</span><div class="seg"><button type="button" aria-pressed="true">Friendly tutor</button><button type="button" aria-pressed="false">Exam-crisp</button><button type="button" aria-pressed="false">Storyteller</button></div></div>
+        <div class="row" data-group="look"><span class="lab">Look</span><div class="seg"><button type="button" aria-pressed="true"><i class="sw sw-min" aria-hidden="true"></i>Clean minimal</button><button type="button" aria-pressed="false"><i class="sw sw-wb" aria-hidden="true"></i>Whiteboard</button><button type="button" aria-pressed="false"><i class="sw sw-brand" aria-hidden="true"></i>Your colours</button></div></div>
+        <div class="row" data-group="format"><span class="lab">Format</span><div class="seg"><button type="button" aria-pressed="true"><i class="ar ar-916" aria-hidden="true"></i>Phone short</button><button type="button" aria-pressed="false"><i class="ar ar-169" aria-hidden="true"></i>Classroom widescreen</button></div></div>
+        <div class="row" data-group="length"><span class="lab">Length</span><div class="seg"><button type="button" aria-pressed="true">1 min</button><button type="button" aria-pressed="false">5 min</button><button type="button" aria-pressed="false">15 min</button><button type="button" aria-pressed="false">60 min</button></div></div>
+        <p class="summary" id="summary" aria-live="polite"></p>
+        <p class="console-note">Try the settings. The engine opens to the waitlist first.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><a class="brand" href="#top" style="font-size:18px;display:inline-flex"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Studyo</a></span>
+    <span>Free visual lessons in maths, physics, chemistry, coding and system design.</span>
+    <a href="https://www.youtube.com/@studyo-m9f" target="_blank" rel="noopener">New lessons on YouTube</a>
+  </div>
+</footer>
+
+<script>
+// On the public site every lesson with a YouTube id plays from YouTube (its current thumbnail and video, and the view counts on the channel);
+// this preview cannot load YouTube, so it plays the local copies and links the longer lessons out.
+const EMBED_YOUTUBE = true;
+// videos.js (public site only, kept current by the Studio's uploader records) can swap a lesson to a newer YouTube id, or to null when it is not public
+const IDS = window.STUDYO_IDS || {};
+const LONG = [
+  { slug: "long-shm", id: "s2WsCla6PRk", k: "Physics · Class 11", title: "Simple harmonic motion, explained visually", sub: "Springs, circles and pendulums: one motion, three pictures.", len: "3:40", tone: "var(--terra)" },
+  { slug: "long-sliding-window", id: "J_Q3j_x0vTs", k: "Coding · LeetCode pattern", title: "The sliding window technique", sub: "From O(n·k) to O(n) by sliding instead of re-adding. In Python.", len: "3:35", tone: "var(--sapphire)" }
+];
+
+// The Google Form link for the engine waitlist. Leave it empty until the form exists: the button then says the waitlist opens soon.
+const WAITLIST_URL = "https://forms.gle/WhERdtvAMhBDuGf37";
+
+const LESSONS = [
+  { shelf: "cs", slug: "cs-1-stacks", yt: "eb9P8UzTB9I", k: "Data structures · 01", title: "Stacks", sub: "How undo works", len: "1:02" },
+  { shelf: "cs", slug: "cs-2-hash-tables", yt: "-8WBNITk1Aw", k: "Data structures · 02", title: "Hash tables", sub: "Find one name among thousands", len: "0:53" },
+  { shelf: "cs", slug: "cs-3-recursion", yt: "AZPGp3lv2U8", k: "Algorithms · 03", title: "Recursion", sub: "A function that calls itself", len: "0:50" },
+  { shelf: "cs", slug: "cs-4-big-o", yt: "lrdacfkKY_E", k: "Fundamentals · 01", title: "Big-O", sub: "Why some code slows down", len: "0:48" },
+  { shelf: "cs", slug: "cs-5-bfs", yt: "L6P8tP_8M9M", k: "Algorithms · 02", title: "Breadth-first search", sub: "The shortest way out", len: "0:46" },
+  { shelf: "cs", slug: "cs-6-binary-search", yt: "dXPoeyTE5a0", k: "Algorithms · 01", title: "Binary search", sub: "One name in a million", len: "0:52" },
+  { shelf: "ma", slug: "maths-01-water-tank", yt: "nHzsFbFrmVw", k: "Maths · 01", title: "A tank of water proves Pythagoras", sub: "Still water never spins", len: "1:00" },
+  { shelf: "ma", slug: "maths-02-fastest-slope", yt: "079Gk9alo8M", k: "Maths · 02", title: "The fastest slope is 45°", sub: "A growing circle shows why", len: "0:58" },
+  { shelf: "ma", slug: "maths-03-one-switch", yt: "NUpA3lPzAhU", k: "Maths · 03", title: "One switch proves an inequality", sub: "Two resistor circuits, one answer", len: "1:02" },
+  { shelf: "ma", slug: "maths-04-lifeguard", yt: "QluvMlT1ojk", k: "Maths · 04", title: "The lifeguard's quickest path", sub: "Why it bends at the shore", len: "0:58" },
+  { shelf: "ma", slug: "maths-05-medians", yt: "Cg-ysrGsepY", k: "Maths · 05", title: "Why medians meet at one point", sub: "Equal weights find the centroid", len: "1:00" },
+  { shelf: "ma", slug: "maths-06-best-hub", yt: "sT7pLjvq9qo", k: "Maths · 06", title: "The best hub for three towns", sub: "Strings and weights find 120°", len: "0:56" },
+  { shelf: "ma", slug: "maths-07-doughnut", yt: "J5pdmTE13oU", k: "Maths · 07", title: "A doughnut's volume", sub: "From one spinning slice", len: "1:01" }
+];
+
+function el(tag, attrs, kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === "text") n.textContent = v; else n.setAttribute(k, v); }
+  (kids || []).forEach(c => n.appendChild(c));
+  return n;
+}
+
+const playing = new Set();
+function stopOthers(except) {
+  playing.forEach(v => { if (v !== except) v.pause(); });
+  const hero = document.getElementById("hero-video");
+  if (except && hero && !hero.muted) { hero.muted = true; syncSound(); }
+}
+
+LESSONS.forEach(l => {
+  if (l.slug in IDS) l.yt = IDS[l.slug];
+  const fromYT = EMBED_YOUTUBE && l.yt;
+  const tile = el("button", { class: "tile", type: "button", "aria-label": "Play " + l.title + ", " + l.len }, [
+    el("img", { src: fromYT ? "https://i.ytimg.com/vi/" + l.yt + "/hqdefault.jpg" : "posters/" + l.slug + ".jpg", alt: "", loading: "lazy", width: "360", height: "640" }),
+    el("span", { class: "play", "aria-hidden": "true" }),
+    el("span", { class: "len", text: l.len })
+  ]);
+  tile.addEventListener("click", () => {
+    if (fromYT) {
+      stopOthers(null); playing.forEach(v => v.pause());
+      const f = el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + l.yt + "?autoplay=1&rel=0&playsinline=1", title: l.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: "", style: "width:100%;height:100%;border:0;display:block" });
+      tile.replaceWith(el("div", { class: "tile" }, [f]));
+      const h = document.getElementById("hero-video"); if (h && !h.muted) { h.muted = true; syncSound(); }
+      return;
+    }
+    const v = el("video", { src: "videos/" + l.slug + ".mp4", poster: "posters/" + l.slug + ".jpg", controls: "", playsinline: "", preload: "auto", "aria-label": l.title + " lesson" });
+    const box = el("div", { class: "tile" }, [v]);
+    tile.replaceWith(box);
+    playing.add(v);
+    v.addEventListener("play", () => stopOthers(v));
+    v.play().catch(() => {});
+  });
+  const card = el("article", { class: "card" }, [
+    tile,
+    el("span", { class: "k " + l.shelf, text: l.k }),
+    el("h4", { text: l.title }),
+    el("p", { class: "sub", text: l.sub })
+  ]);
+  document.querySelector('[data-shelf="' + l.shelf + '"]').appendChild(card);
+});
+
+LONG.forEach(l => {
+  if (l.slug in IDS) { if (!IDS[l.slug]) return; l.id = IDS[l.slug]; }
+  const watch = "https://www.youtube.com/watch?v=" + l.id;
+  let tile;
+  if (EMBED_YOUTUBE) {
+    tile = el("button", { class: "ltile thumb", type: "button", "aria-label": "Play " + l.title + ", " + l.len }, [
+      el("img", { src: "https://i.ytimg.com/vi/" + l.id + "/hqdefault.jpg", alt: "", loading: "lazy" }),
+      el("span", { class: "play", "aria-hidden": "true" }), el("span", { class: "ldur", text: l.len })
+    ]);
+    tile.addEventListener("click", () => {
+      playing.forEach(v => v.pause()); if (hero && !hero.muted) { hero.muted = true; syncSound(); }
+      const f = el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + l.id + "?autoplay=1&rel=0", title: l.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: "" });
+      const box = el("div", { class: "ltile thumb" }, [f]); tile.replaceWith(box);
+    });
+  } else {
+    tile = el("a", { class: "ltile", href: watch, target: "_blank", rel: "noopener", "aria-label": l.title + ", " + l.len + ", watch on YouTube" }, [
+      el("span", { class: "stripe", style: "background:" + l.tone, "aria-hidden": "true" }),
+      el("span", { class: "lk", text: l.k }), el("span", { class: "lt", text: l.title }),
+      el("span", { class: "lrow" }, [el("span", { class: "ldur", text: l.len }), el("span", { class: "lgo", text: "Watch on YouTube ↗" })])
+    ]);
+  }
+  const card = el("article", { class: "long" }, [tile]);
+  if (EMBED_YOUTUBE) { card.appendChild(el("span", { class: "k", text: l.k })); card.appendChild(el("h4", { text: l.title })); }
+  card.appendChild(el("p", { class: "sub", text: l.sub }));
+  document.querySelector("[data-long]").appendChild(card);
+});
+
+const hero = document.getElementById("hero-video"), soundBtn = document.getElementById("hero-sound");
+function syncSound() { soundBtn.textContent = hero.muted ? "Turn sound on" : "Turn sound off"; soundBtn.setAttribute("aria-pressed", String(!hero.muted)); }
+soundBtn.addEventListener("click", () => {
+  hero.muted = !hero.muted;
+  if (!hero.muted) { playing.forEach(v => v.pause()); hero.currentTime = 0; hero.play().catch(() => {}); }
+  syncSound();
+});
+if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { hero.removeAttribute("autoplay"); hero.pause(); }
+
+// the settings console: segmented choices, the pace slider and a one-line summary (a preview; nothing is sent anywhere)
+const consoleEl = document.querySelector(".console"), paceIn = document.getElementById("pace"), paceOut = document.getElementById("pace-out"), summary = document.getElementById("summary");
+function pick(group) { const b = consoleEl.querySelector('[data-group="' + group + '"] [aria-pressed="true"]'); return b ? b.textContent.trim() : ""; }
+function summarize() {
+  const pace = Number(paceIn.value).toFixed(2).replace(/0$/, "") + "×"; paceOut.textContent = pace;
+  summary.textContent = "Your lesson: " + [pick("voice") + " voice", pace + " pace", pick("style"), pick("look"), pick("format"), pick("length")].join(" · ");
+}
+consoleEl.querySelectorAll("[data-group] .seg").forEach(seg => seg.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  // a phone short stays short: picking 15 or 60 minutes switches to widescreen, picking a phone short brings the length back to 1 minute
+  const group = seg.parentElement.dataset.group, long = ["15 min", "60 min"].includes(pick("length"));
+  const set = (g, label) => consoleEl.querySelectorAll('[data-group="' + g + '"] button').forEach(x => x.setAttribute("aria-pressed", String(x.textContent.trim() === label)));
+  if (long && pick("format") === "Phone short") { if (group === "format") set("length", "1 min"); else set("format", "Classroom widescreen"); }
+  summarize();
+}));
+paceIn.addEventListener("input", summarize);
+summarize();
+
+const wbtn = document.getElementById("waitlist-btn"), wnote = document.getElementById("waitlist-note");
+const soonAsk = document.getElementById("soon-ask");
+if (WAITLIST_URL) { wbtn.href = WAITLIST_URL; if (soonAsk) { soonAsk.href = WAITLIST_URL; soonAsk.target = "_blank"; soonAsk.rel = "noopener"; } }
+else {
+  wbtn.textContent = "Waitlist opens soon";
+  wbtn.setAttribute("aria-disabled", "true");
+  wbtn.removeAttribute("target");
+  wbtn.addEventListener("click", e => e.preventDefault());
+  wnote.textContent = "The sign-up form opens shortly. Until then, follow Studyo on YouTube to hear first.";
+}
+</script>
+
+</body>
+</html>

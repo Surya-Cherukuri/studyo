@@ -1,0 +1,4 @@
+// Written by tools/site_sync.py from the Studio's YouTube uploader records: the current public YouTube id of each lesson on this site
+// (null = not public right now: a short plays its local copy, a longer lesson is hidden). Do not edit by hand.
+window.STUDYO_IDS = {"cs-1-stacks": "eb9P8UzTB9I", "cs-2-hash-tables": "PmKR9Sj0l7g", "cs-3-recursion": "AZPGp3lv2U8", "cs-4-big-o": "lrdacfkKY_E", "cs-5-bfs": "L6P8tP_8M9M", "cs-6-binary-search": "Cx8fNdbsyYg", "long-shm": "0Y4hQEIXHI0", "long-sliding-window": "J_Q3j_x0vTs", "maths-01-water-tank": "nHzsFbFrmVw", "maths-02-fastest-slope": "079Gk9alo8M", "maths-03-one-switch": "NUpA3lPzAhU", "maths-04-lifeguard": "QluvMlT1ojk", "maths-05-medians": "Cg-ysrGsepY", "maths-06-best-hub": "sT7pLjvq9qo", "maths-07-doughnut": "J5pdmTE13oU"};
+window.STUDYO_IDS_AT = "2026-10-31T10:09:47Z";
