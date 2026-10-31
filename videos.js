@@ -1,6 +1,6 @@
 // Written by tools/site_sync.py from the Studio's YouTube uploader records: the current public YouTube id of each lesson on this site
 // (null = not public right now: a short plays its local copy, a longer lesson is hidden). Do not edit by hand.
-window.STUDYO_IDS = {"cs-1-stacks": "k5jJEW3x3Mc", "cs-2-hash-tables": null, "cs-3-recursion": "lb3iEPukpAw", "cs-4-big-o": "yzrcJPOUXp4", "cs-5-bfs": "jJDGyHBK_bM", "cs-6-binary-search": "Cx8fNdbsyYg", "long-shm": "0Y4hQEIXHI0", "long-sliding-window": "J_Q3j_x0vTs", "maths-01-water-tank": "JnPgQRGcMVY", "maths-02-fastest-slope": "yt838g369Gs", "maths-03-one-switch": "g4GjEMvvl3I", "maths-04-lifeguard": "QluvMlT1ojk", "maths-05-medians": "myLUolkaTG0", "maths-06-best-hub": "sT7pLjvq9qo", "maths-07-doughnut": "yffEZx54Pvw"};
+window.STUDYO_IDS = {"cs-1-stacks": "eb9P8UzTB9I", "cs-2-hash-tables": "-8WBNITk1Aw", "cs-3-recursion": "AZPGp3lv2U8", "cs-4-big-o": "lrdacfkKY_E", "cs-5-bfs": "L6P8tP_8M9M", "cs-6-binary-search": "dXPoeyTE5a0", "long-shm": "0Y4hQEIXHI0", "long-sliding-window": "J_Q3j_x0vTs", "maths-01-water-tank": "nHzsFbFrmVw", "maths-02-fastest-slope": "079Gk9alo8M", "maths-03-one-switch": "NUpA3lPzAhU", "maths-04-lifeguard": "QluvMlT1ojk", "maths-05-medians": "Cg-ysrGsepY", "maths-06-best-hub": "sT7pLjvq9qo", "maths-07-doughnut": "J5pdmTE13oU"};
 // public, but "allow embedding" is off on YouTube: a short plays its local copy, a longer lesson links out
-window.STUDYO_LINKONLY = {"long-shm": true, "long-sliding-window": true, "maths-04-lifeguard": true, "maths-06-best-hub": true};
-window.STUDYO_IDS_AT = "2026-10-31T12:21:17Z";
+window.STUDYO_LINKONLY = {"cs-1-stacks": true, "cs-2-hash-tables": true, "cs-3-recursion": true, "cs-4-big-o": true, "cs-5-bfs": true, "cs-6-binary-search": true, "long-shm": true, "long-sliding-window": true, "maths-04-lifeguard": true, "maths-05-medians": true, "maths-06-best-hub": true, "maths-07-doughnut": true};
+window.STUDYO_IDS_AT = "2026-10-31T12:24:18Z";
