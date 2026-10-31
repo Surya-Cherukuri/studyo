@@ -418,6 +418,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 const EMBED_YOUTUBE = true;
 // videos.js (public site only, kept current by the Studio's uploader records) can swap a lesson to a newer YouTube id, or to null when it is not public
 const IDS = window.STUDYO_IDS || {};
+// public on YouTube but with embedding switched off there: a short plays its local copy, a longer lesson links out to YouTube
+const LINKONLY = window.STUDYO_LINKONLY || {};
 const LONG = [
   { slug: "long-shm", id: "s2WsCla6PRk", k: "Physics · Class 11", title: "Simple harmonic motion, explained visually", sub: "Springs, circles and pendulums: one motion, three pictures.", len: "3:40", tone: "var(--terra)" },
   { slug: "long-sliding-window", id: "J_Q3j_x0vTs", k: "Coding · LeetCode pattern", title: "The sliding window technique", sub: "From O(n·k) to O(n) by sliding instead of re-adding. In Python.", len: "3:35", tone: "var(--sapphire)" }
@@ -458,7 +460,7 @@ function stopOthers(except) {
 
 LESSONS.forEach(l => {
   if (l.slug in IDS) l.yt = IDS[l.slug];
-  const fromYT = EMBED_YOUTUBE && l.yt;
+  const fromYT = EMBED_YOUTUBE && l.yt && !LINKONLY[l.slug];
   const tile = el("button", { class: "tile", type: "button", "aria-label": "Play " + l.title + ", " + l.len }, [
     el("img", { src: fromYT ? "https://i.ytimg.com/vi/" + l.yt + "/hqdefault.jpg" : "posters/" + l.slug + ".jpg", alt: "", loading: "lazy", width: "360", height: "640" }),
     el("span", { class: "play", "aria-hidden": "true" }),
@@ -491,8 +493,9 @@ LESSONS.forEach(l => {
 LONG.forEach(l => {
   if (l.slug in IDS) { if (!IDS[l.slug]) return; l.id = IDS[l.slug]; }
   const watch = "https://www.youtube.com/watch?v=" + l.id;
+  const embed = EMBED_YOUTUBE && !LINKONLY[l.slug];
   let tile;
-  if (EMBED_YOUTUBE) {
+  if (embed) {
     tile = el("button", { class: "ltile thumb", type: "button", "aria-label": "Play " + l.title + ", " + l.len }, [
       el("img", { src: "https://i.ytimg.com/vi/" + l.id + "/hqdefault.jpg", alt: "", loading: "lazy" }),
       el("span", { class: "play", "aria-hidden": "true" }), el("span", { class: "ldur", text: l.len })
@@ -510,7 +513,7 @@ LONG.forEach(l => {
     ]);
   }
   const card = el("article", { class: "long" }, [tile]);
-  if (EMBED_YOUTUBE) { card.appendChild(el("span", { class: "k", text: l.k })); card.appendChild(el("h4", { text: l.title })); }
+  if (embed) { card.appendChild(el("span", { class: "k", text: l.k })); card.appendChild(el("h4", { text: l.title })); }
   card.appendChild(el("p", { class: "sub", text: l.sub }));
   document.querySelector("[data-long]").appendChild(card);
 });
