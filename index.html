@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: a shelf of phones. The hero holds one lesson playing in a phone frame; lessons sit as portrait cards in two shelves; the stacked-block mark is the one flourish. */
+/* Layout: a shelf of phones. The hero plays a silent reel of lesson moments in a phone frame; every lesson opens in one big player; lessons sit as portrait cards in two shelves; the stacked-block mark is the one flourish. */
 :root {
   --paper: #F4F6FA; --surface: #FFFFFF; --sunk: #E9EEF6; --ink: #14213D; --muted: #5E6B85; --line: #D8DFEB;
   --sapphire: #2B58A6; --sapphire-ink: #FFFFFF; --teal: #168A8F; --gold: #B7791F; --terra: #C9533A;
@@ -83,7 +83,6 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .phone-col { display: grid; justify-items: center; gap: 14px; }
 .phone { position: relative; width: min(300px, 100%); aspect-ratio: 9 / 16; background: var(--phone); border-radius: 38px; padding: 10px; box-shadow: var(--shadow); max-width: 100%; }
 .phone video { width: 100%; height: 100%; object-fit: cover; border-radius: 29px; display: block; background: #fff; }
-.sound { font: 700 14px/1 var(--body); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; }
 .phone-cap { font-size: 14px; color: var(--muted); text-align: center; }
 
 /* shelves */
@@ -220,6 +219,21 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .summary { font: 500 13px/1.5 var(--mono); color: var(--nv-teal); padding: 14px 18px 4px; }
 .console-note { font-size: 13px; color: var(--nv-muted); padding: 0 18px 16px; }
 
+/* the player: one big screen for every lesson, with full screen */
+dialog.player { border: 0; padding: 12px; border-radius: 22px; background: #0F1729; color: #fff; width: fit-content; max-width: calc(100vw - 16px); max-height: calc(100vh - 16px); max-height: calc(100dvh - 16px); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .6); overflow: hidden; }
+dialog.player::backdrop { background: rgba(9, 14, 28, .84); }
+.player-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; min-width: 0; }
+.player-bar h2 { flex: 1 1 auto; min-width: 0; margin: 0 0 0 4px; font: 800 17px/1.2 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pbtn { flex: none; display: inline-flex; align-items: center; gap: 6px; font: 700 14px/1 var(--body); color: #fff; background: rgba(255, 255, 255, .1); border: 1.5px solid rgba(255, 255, 255, .22); border-radius: 999px; padding: 9px 13px; cursor: pointer; text-decoration: none; }
+.pbtn:hover { background: rgba(255, 255, 255, .18); }
+.pbtn.x { width: 36px; height: 36px; padding: 0; justify-content: center; font-size: 18px; }
+.stage { position: relative; background: #000; border-radius: 14px; overflow: hidden; }
+.stage.portrait { aspect-ratio: 9 / 16; height: min(80vh, calc((100vw - 40px) * 16 / 9)); height: min(80dvh - 30px, calc((100vw - 40px) * 16 / 9)); }
+.stage.landscape { aspect-ratio: 16 / 9; width: min(1100px, calc(100vw - 40px), calc((100vh - 110px) * 16 / 9)); }
+.stage iframe, .stage video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; display: block; }
+.stage:fullscreen { border-radius: 0; width: 100vw; height: 100vh; aspect-ratio: auto; }
+@media (max-width: 480px) { .player-bar .pbtn .wide-only { display: none; } dialog.player { padding: 10px; } }
+
 footer { border-top: 1px solid var(--line); padding-block: 32px 48px; color: var(--muted); font-size: 15px; }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
 
@@ -266,9 +280,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <p class="facts"><span><b>15</b> lessons here</span><span>from <b>1-minute</b> shorts</span><span>to <b>15-minute</b> walkthroughs</span><span>up to <b>60 minutes</b> when a topic needs it</span></p>
     </div>
     <div class="phone-col">
-      <div class="phone"><video id="hero-video" src="videos/cs-5-bfs.mp4" poster="posters/cs-5-bfs.jpg" autoplay muted loop playsinline aria-label="Breadth-first search lesson playing"></video></div>
-      <button class="sound" id="hero-sound" type="button" aria-pressed="false">Turn sound on</button>
-      <p class="phone-cap">Breadth-first search, 46 seconds</p>
+      <div class="phone"><video id="hero-video" src="videos/hero-reel.mp4" poster="posters/hero-reel.jpg" autoplay muted loop playsinline aria-label="A silent reel of moments from the lessons: a work queue, search typeahead, breadth-first search, hash tables, recursion, binary search and maths proofs"></video></div>
+      <p class="phone-cap">A few moments from the lessons, no sound.<br>Tap any lesson below to watch it with sound.</p>
     </div>
   </section>
 
@@ -277,7 +290,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <div class="head">
         <p class="kicker">Lessons</p>
         <h2>Pick an idea. Watch it happen.</h2>
-        <p>Tap a lesson to play it here. The pictures run the real thing: a real stack, a real search, real forces.</p>
+        <p>Tap a lesson to play it here, on a big screen or full screen. The pictures run the real thing: a real stack, a real search, real forces.</p>
       </div>
 
       <div class="lengths" aria-label="Lesson lengths">
@@ -412,6 +425,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   </div>
 </footer>
 
+<dialog class="player" id="player" aria-labelledby="player-title">
+  <div class="player-bar">
+    <h2 id="player-title">Lesson</h2>
+    <button class="pbtn" id="player-fs" type="button" aria-label="Full screen"><span aria-hidden="true">⛶</span><span class="wide-only">Full screen</span></button>
+    <a class="pbtn" id="player-yt" href="#" target="_blank" rel="noopener"><span class="wide-only">YouTube</span><span aria-hidden="true">↗</span></a>
+    <button class="pbtn x" id="player-close" type="button" aria-label="Close">✕</button>
+  </div>
+  <div class="stage portrait" id="player-stage"></div>
+</dialog>
+
 <script>
 // On the public site every lesson with a YouTube id plays from YouTube (its current thumbnail and video, and the view counts on the channel);
 // this preview cannot load YouTube, so it plays the local copies and links the longer lessons out.
@@ -451,12 +474,41 @@ function el(tag, attrs, kids) {
   return n;
 }
 
-const playing = new Set();
-function stopOthers(except) {
-  playing.forEach(v => { if (v !== except) v.pause(); });
-  const hero = document.getElementById("hero-video");
-  if (except && hero && !hero.muted) { hero.muted = true; syncSound(); }
+// one player for everything: a big screen in a dialog, YouTube when the lesson can be embedded, else our own copy; full screen either way
+const hero = document.getElementById("hero-video");
+const dlg = document.getElementById("player"), stage = document.getElementById("player-stage"), ptitle = document.getElementById("player-title");
+const pfs = document.getElementById("player-fs"), pyt = document.getElementById("player-yt");
+const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function openPlayer(o) {   // o = { title, yt (embed this id), local (our mp4), poster, watch (YouTube id for the link), portrait }
+  ptitle.textContent = o.title;
+  stage.className = "stage " + (o.portrait ? "portrait" : "landscape");
+  const m = o.yt
+    ? el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + o.yt + "?autoplay=1&rel=0&playsinline=1", title: o.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: "" })
+    : el("video", { src: o.local, poster: o.poster || "", controls: "", playsinline: "", preload: "auto", "aria-label": o.title });
+  stage.replaceChildren(m);
+  pyt.hidden = !o.watch; if (o.watch) pyt.href = (o.portrait ? "https://www.youtube.com/shorts/" : "https://www.youtube.com/watch?v=") + o.watch;
+  pfs.hidden = !(stage.requestFullscreen || stage.webkitRequestFullscreen || m.webkitEnterFullscreen);
+  hero.pause();
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  if (m.tagName === "VIDEO") m.play().catch(() => {});
 }
+pfs.addEventListener("click", () => {
+  const m = stage.firstElementChild;
+  if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {});
+  else if (stage.webkitRequestFullscreen) stage.webkitRequestFullscreen();
+  else if (m && m.webkitEnterFullscreen) m.webkitEnterFullscreen();   // iPhone: only a video can go full screen
+});
+document.getElementById("player-close").addEventListener("click", () => dlg.close ? dlg.close() : dlg.removeAttribute("open"));
+dlg.addEventListener("click", e => {   // a click on the dark backdrop closes it
+  if (e.target !== dlg) return;
+  const r = dlg.getBoundingClientRect();
+  if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlg.close();
+});
+dlg.addEventListener("close", () => {
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  stage.replaceChildren();   // stops the sound
+  if (!reduced) hero.play().catch(() => {});
+});
 
 LESSONS.forEach(l => {
   if (l.slug in IDS) l.yt = IDS[l.slug];
@@ -466,21 +518,7 @@ LESSONS.forEach(l => {
     el("span", { class: "play", "aria-hidden": "true" }),
     el("span", { class: "len", text: l.len })
   ]);
-  tile.addEventListener("click", () => {
-    if (fromYT) {
-      stopOthers(null); playing.forEach(v => v.pause());
-      const f = el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + l.yt + "?autoplay=1&rel=0&playsinline=1", title: l.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: "", style: "width:100%;height:100%;border:0;display:block" });
-      tile.replaceWith(el("div", { class: "tile" }, [f]));
-      const h = document.getElementById("hero-video"); if (h && !h.muted) { h.muted = true; syncSound(); }
-      return;
-    }
-    const v = el("video", { src: "videos/" + l.slug + ".mp4", poster: "posters/" + l.slug + ".jpg", controls: "", playsinline: "", preload: "auto", "aria-label": l.title + " lesson" });
-    const box = el("div", { class: "tile" }, [v]);
-    tile.replaceWith(box);
-    playing.add(v);
-    v.addEventListener("play", () => stopOthers(v));
-    v.play().catch(() => {});
-  });
+  tile.addEventListener("click", () => openPlayer({ title: l.title, yt: fromYT ? l.yt : null, local: "videos/" + l.slug + ".mp4", poster: "posters/" + l.slug + ".jpg", watch: l.yt, portrait: true }));
   const card = el("article", { class: "card" }, [
     tile,
     el("span", { class: "k " + l.shelf, text: l.k }),
@@ -500,11 +538,7 @@ LONG.forEach(l => {
       el("img", { src: "https://i.ytimg.com/vi/" + l.id + "/hqdefault.jpg", alt: "", loading: "lazy" }),
       el("span", { class: "play", "aria-hidden": "true" }), el("span", { class: "ldur", text: l.len })
     ]);
-    tile.addEventListener("click", () => {
-      playing.forEach(v => v.pause()); if (hero && !hero.muted) { hero.muted = true; syncSound(); }
-      const f = el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + l.id + "?autoplay=1&rel=0", title: l.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: "" });
-      const box = el("div", { class: "ltile thumb" }, [f]); tile.replaceWith(box);
-    });
+    tile.addEventListener("click", () => openPlayer({ title: l.title, yt: l.id, watch: l.id, portrait: false }));
   } else {
     tile = el("a", { class: "ltile", href: watch, target: "_blank", rel: "noopener", "aria-label": l.title + ", " + l.len + ", watch on YouTube" }, [
       el("span", { class: "stripe", style: "background:" + l.tone, "aria-hidden": "true" }),
@@ -518,14 +552,7 @@ LONG.forEach(l => {
   document.querySelector("[data-long]").appendChild(card);
 });
 
-const hero = document.getElementById("hero-video"), soundBtn = document.getElementById("hero-sound");
-function syncSound() { soundBtn.textContent = hero.muted ? "Turn sound on" : "Turn sound off"; soundBtn.setAttribute("aria-pressed", String(!hero.muted)); }
-soundBtn.addEventListener("click", () => {
-  hero.muted = !hero.muted;
-  if (!hero.muted) { playing.forEach(v => v.pause()); hero.currentTime = 0; hero.play().catch(() => {}); }
-  syncSound();
-});
-if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { hero.removeAttribute("autoplay"); hero.pause(); }
+if (reduced) { hero.removeAttribute("autoplay"); hero.pause(); }
 
 // the settings console: segmented choices, the pace slider and a one-line summary (a preview; nothing is sent anywhere)
 const consoleEl = document.querySelector(".console"), paceIn = document.getElementById("pace"), paceOut = document.getElementById("pace-out"), summary = document.getElementById("summary");
