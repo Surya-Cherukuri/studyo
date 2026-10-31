@@ -1,6 +1,6 @@
 # Studyo website
 
-The public Studyo landing page: free one-minute lessons that play in the page, how they're made, and the engine waitlist.
+Live at https://surya-cherukuri.github.io/studyo/ . The public Studyo landing page: free one-minute lessons that play in the page, how they're made, and the engine waitlist.
 Plain HTML, no build step. Every lesson plays from YouTube by its video id (the `yt:` values in `LESSONS` and the `id:` values in `LONG` inside `index.html`),
 so thumbnail and video changes made on YouTube show up here by themselves; the titles on the page are written in `index.html`.
 `videos/` and `posters/` hold local copies: the hero plays `videos/cs-5-bfs.mp4`, and a lesson without a YouTube id plays its local file.
@@ -8,7 +8,7 @@ so thumbnail and video changes made on YouTube show up here by themselves; the t
 ## Kept up to date by itself
 
 `videos.js` holds the YouTube id of each lesson on the page. Your Mac rewrites it from the Studio's uploader records (tools/site_sync.py, run every minute by
-fetch_reports.sh) whenever a lesson's video is replaced or goes private, then commits and pushes this repo. Only the lessons already on the page are
+fetch_reports.sh) whenever a lesson's video is replaced or goes private, then commits and pushes this repo. It also pushes any other change made in this folder (site edits from Claude go live the same way). Only the lessons already on the page are
 kept in sync (the list is tools/site/lessons.json in physics-videos); new YouTube uploads are not added by themselves. Don't edit videos.js by hand.
 
 ## Put it online (GitHub Pages, free)
