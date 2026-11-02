@@ -196,6 +196,28 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .engine-band .signup h3 { color: var(--nv-ink); }
 .engine-band .signup .who span { background: rgba(160, 186, 235, .10); color: var(--nv-ink); }
 .engine-band .signup .fine { color: var(--nv-muted); }
+.engine-band .signup .fine a { color: var(--nv-accent); }
+.wl-form[hidden], .wl-done[hidden], #wl-other[hidden] { display: none; }
+.wl-form { display: grid; gap: 16px; }
+.wl-field { display: grid; gap: 7px; font-size: 14px; font-weight: 700; color: var(--nv-ink); }
+.wl-field i { font-style: normal; font-weight: 600; color: var(--nv-muted); }
+.wl-form input[type=email], .wl-form input[type=text] { font: 500 16px/1.3 var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--nv-line); background: rgba(160, 186, 235, .06); color: var(--nv-ink); width: 100%; }
+.wl-form input::placeholder { color: var(--nv-muted); opacity: .8; }
+.wl-form input:focus { outline: 2px solid var(--nv-accent); outline-offset: 1px; border-color: transparent; }
+.wl-form input[aria-invalid=true] { border-color: var(--nv-terra); }
+.wl-roles { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.wl-roles legend { font-size: 14px; font-weight: 700; margin-bottom: 9px; padding: 0; color: var(--nv-ink); }
+.wl-roles label { position: relative; }
+.wl-roles input[type=checkbox] { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.wl-roles span { display: inline-block; font-size: 14px; font-weight: 700; padding: 8px 14px; border-radius: 999px; background: rgba(160, 186, 235, .10); color: var(--nv-ink); border: 1.5px solid transparent; cursor: pointer; user-select: none; }
+.wl-roles input:checked + span { background: var(--nv-accent); color: #0B1222; }
+.wl-roles input:focus-visible + span { border-color: var(--nv-ink); }
+.wl-roles.bad span { border-color: rgba(236, 132, 104, .6); }
+#wl-other { flex-basis: 100%; }
+.wl-done { display: grid; gap: 10px; }
+.engine-band .signup .wl-done h3 { color: var(--nv-teal); }
+.wl-done:focus { outline: none; }
+.wl-done p { color: var(--nv-ink); }
 .engine-band .btn.primary { background: var(--nv-accent); color: #0B1222; box-shadow: 0 4px 0 #3D63AE; }
 .console { background: var(--nv-panel); border: 1px solid var(--nv-line); border-radius: 22px; overflow: hidden; min-width: 0;
   box-shadow: 0 0 0 1px rgba(122, 162, 238, .08), 0 0 60px -20px rgba(122, 162, 238, .35), 0 30px 60px -30px rgba(0, 0, 0, .8); }
@@ -210,7 +232,7 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .seg button:hover { color: var(--nv-ink); }
 .seg button[aria-pressed="true"] { color: #fff; background: rgba(122, 162, 238, .18); border-color: var(--nv-accent); box-shadow: 0 0 18px -6px rgba(122, 162, 238, .8); }
 .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-.sw-min { background: #F4F6FA; } .sw-dark { background: linear-gradient(135deg, #10141c, #1d2433); } .sw-topic { background: linear-gradient(135deg, #2a1033, #c79a3a); } .sw-wb { background: #fff linear-gradient(rgba(43, 88, 166, .5) 1px, transparent 1px) 0 0 / 4px 4px; } .sw-brand { background: linear-gradient(135deg, var(--nv-terra), var(--nv-accent)); }
+.sw-min { background: #F4F6FA; } .sw-wb { background: #fff linear-gradient(rgba(43, 88, 166, .5) 1px, transparent 1px) 0 0 / 4px 4px; } .sw-brand { background: linear-gradient(135deg, var(--nv-terra), var(--nv-accent)); }
 .ar { display: inline-block; border: 1.5px solid currentColor; border-radius: 2px; } .ar-916 { width: 9px; height: 15px; } .ar-169 { width: 17px; height: 10px; }
 .pace { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
 .pace .end { font-size: 12px; color: var(--nv-muted); }
@@ -365,7 +387,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <div><h4>Competitive and entrance exams</h4><p>JEE Main and Advanced, the SAT, and other exams in the US and around the world, solved one step at a time.</p></div>
         <div><h4>Real interview questions</h4><p>A video explanation for each coding interview question, plus a code editor to write and run your own solution.</p></div>
         <div><h4>System design interviews</h4><p>A whole interview, from requirements to deep dives, in one video.</p></div>
-        <div class="ask"><h4>More subjects</h4><p>Added based on what you ask for. <a id="soon-ask" href="https://forms.gle/WhERdtvAMhBDuGf37" target="_blank" rel="noopener">Tell us what you want next</a>.</p></div>
+        <div class="ask"><h4>More subjects</h4><p>Added based on what you ask for. <a id="soon-ask" href="#waitlist">Tell us what you want next</a>.</p></div>
       </div>
     </div>
   </section>
@@ -394,17 +416,30 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <p class="lede">We're turning the engine behind these videos into a tool. You give it a topic, make it yours, check the script, and get a finished lesson. We're opening it to a small group first.</p>
         <ul>
           <li>From a 1-minute short to a 60-minute lesson with chapters</li>
-          <li>Pick a look: a theme for every subject and style, or one built around your topic, like aqua glass for a water tank or velvet and gold for a ring</li>
-          <li>Make it yours: voice, pace, teaching style, level, examples and length</li>
+          <li>Your voice, narration pace, teaching style and look</li>
           <li>Maths, physics, chemistry, code and system design for now, with more subjects as people ask for them</li>
           <li>You read and approve the script before anything is made</li>
         </ul>
       </div>
-      <div class="signup">
-          <h3>Join the engine waitlist</h3>
-          <div class="who" aria-label="Who it's for"><span>Teacher</span><span>Tutor</span><span>Creator</span><span>Developer</span><span>Student</span></div>
-          <a class="btn primary" id="waitlist-btn" href="https://forms.gle/WhERdtvAMhBDuGf37" target="_blank" rel="noopener">Join the waitlist</a>
-          <p class="fine" id="waitlist-note">We only use your email to tell you about the engine.</p>
+      <div class="signup" id="waitlist">
+          <h3 id="wl-title">Join the engine waitlist</h3>
+          <form class="wl-form" id="wl-form" novalidate>
+            <label class="wl-field"><span>Email</span><input type="email" id="wl-email" required autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
+            <fieldset class="wl-roles" id="wl-roles"><legend>I am a…</legend>
+              <label><input type="checkbox" value="Teacher"><span>Teacher</span></label>
+              <label><input type="checkbox" value="Student"><span>Student</span></label>
+              <label><input type="checkbox" value="Tutor"><span>Tutor</span></label>
+              <label><input type="checkbox" value="Content creator"><span>Content creator</span></label>
+              <label><input type="checkbox" value="Software Developer"><span>Software developer</span></label>
+              <label><input type="checkbox" value="__other_option__" id="wl-other-box"><span>Other</span></label>
+              <input type="text" id="wl-other" maxlength="120" placeholder="Other: what do you do?" aria-label="Other: what do you do?" hidden>
+            </fieldset>
+            <label class="wl-field"><span>What would you make first? <i>optional</i></span><input type="text" id="wl-make" maxlength="400" placeholder="e.g. a 10-minute lesson on electric circuits"></label>
+            <label class="wl-field"><span>Which topic should we add next? <i>optional</i></span><input type="text" id="wl-topic" maxlength="400" placeholder="e.g. biology, economics, JEE maths"></label>
+            <button class="btn primary" type="submit" id="wl-submit">Join the waitlist</button>
+            <p class="fine" id="wl-note" role="status" aria-live="polite">We only use your email to tell you about the engine.</p>
+          </form>
+          <div class="wl-done" id="wl-done" hidden tabindex="-1"><h3>You're on the list ✓</h3><p>We'll email you when the engine opens. Thanks for telling us what you'd make.</p></div>
         </div>
       <div class="console" aria-label="Lesson settings, a preview">
         <div class="console-top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>New lesson</span><span class="demo">Preview</span></div>
@@ -412,7 +447,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <div class="row" data-group="voice"><span class="lab">Voice</span><div class="seg"><button type="button" aria-pressed="true">Warm female</button><button type="button" aria-pressed="false">Calm male</button><button type="button" aria-pressed="false">More voices</button></div></div>
         <div class="row"><span class="lab"><label for="pace">Pace</label></span><div class="pace"><span class="end">Slower</span><input type="range" id="pace" min="0.8" max="1.3" step="0.05" value="1"><span class="end">Faster</span><output id="pace-out" for="pace">1.0×</output></div></div>
         <div class="row" data-group="style"><span class="lab">Style</span><div class="seg"><button type="button" aria-pressed="true">Friendly tutor</button><button type="button" aria-pressed="false">Exam-crisp</button><button type="button" aria-pressed="false">Storyteller</button></div></div>
-        <div class="row" data-group="look"><span class="lab">Look</span><div class="seg"><button type="button" aria-pressed="true"><i class="sw sw-min" aria-hidden="true"></i>Clean minimal</button><button type="button" aria-pressed="false"><i class="sw sw-wb" aria-hidden="true"></i>Whiteboard</button><button type="button" aria-pressed="false"><i class="sw sw-dark" aria-hidden="true"></i>Dark editor</button><button type="button" aria-pressed="false"><i class="sw sw-topic" aria-hidden="true"></i>Topic world</button><button type="button" aria-pressed="false"><i class="sw sw-brand" aria-hidden="true"></i>Your colours</button></div></div>
+        <div class="row" data-group="look"><span class="lab">Look</span><div class="seg"><button type="button" aria-pressed="true"><i class="sw sw-min" aria-hidden="true"></i>Clean minimal</button><button type="button" aria-pressed="false"><i class="sw sw-wb" aria-hidden="true"></i>Whiteboard</button><button type="button" aria-pressed="false"><i class="sw sw-brand" aria-hidden="true"></i>Your colours</button></div></div>
         <div class="row" data-group="format"><span class="lab">Format</span><div class="seg"><button type="button" aria-pressed="true"><i class="ar ar-916" aria-hidden="true"></i>Phone short</button><button type="button" aria-pressed="false"><i class="ar ar-169" aria-hidden="true"></i>Classroom widescreen</button></div></div>
         <div class="row" data-group="length"><span class="lab">Length</span><div class="seg"><button type="button" aria-pressed="true">1 min</button><button type="button" aria-pressed="false">5 min</button><button type="button" aria-pressed="false">15 min</button><button type="button" aria-pressed="false">60 min</button></div></div>
         <p class="summary" id="summary" aria-live="polite"></p>
@@ -519,6 +554,21 @@ dlg.addEventListener("close", () => {
   if (!reduced) hero.play().catch(() => {});
 });
 
+// Most watched first. videos.js carries each lesson's YouTube views and likes (YouTube reports them about two days late);
+// a lesson with no numbers yet keeps its written place after the ones that have them, and without videos.js nothing moves.
+const VIEWS = window.STUDYO_VIEWS || {};
+const stat = slug => VIEWS[slug] || [-1, -1];
+const byViews = (a, b) => { const x = stat(a.slug), y = stat(b.slug); return (y[0] - x[0]) || (y[1] - x[1]); };
+if (Object.keys(VIEWS).length) {
+  LESSONS.sort(byViews); LONG.sort(byViews);   // sort keeps ties in their written order
+  // say so only on shelves where YouTube has sent numbers for at least one lesson
+  const counted = list => list.some(l => l.slug in VIEWS);
+  [["[data-long]", LONG], ['[data-shelf="cs"]', LESSONS.filter(l => l.shelf === "cs")], ['[data-shelf="ma"]', LESSONS.filter(l => l.shelf === "ma")]].forEach(([sel, list]) => {
+    const c = counted(list) && document.querySelector(sel)?.parentElement.querySelector(".shelf-title .count");
+    if (c) c.textContent += " · most watched first";
+  });
+}
+
 LESSONS.forEach(l => {
   if (l.slug in IDS) l.yt = IDS[l.slug];
   const fromYT = EMBED_YOUTUBE && l.yt && !LINKONLY[l.slug];
@@ -582,19 +632,38 @@ consoleEl.querySelectorAll("[data-group] .seg").forEach(seg => seg.addEventListe
 paceIn.addEventListener("input", summarize);
 summarize();
 
-const wbtn = document.getElementById("waitlist-btn"), wnote = document.getElementById("waitlist-note");
-const soonAsk = document.getElementById("soon-ask");
-if (WAITLIST_URL) { wbtn.href = WAITLIST_URL; if (soonAsk) { soonAsk.href = WAITLIST_URL; soonAsk.target = "_blank"; soonAsk.rel = "noopener"; } }
-else {
-  wbtn.textContent = "Waitlist opens soon";
-  wbtn.setAttribute("aria-disabled", "true");
-  wbtn.removeAttribute("target");
-  wbtn.addEventListener("click", e => e.preventDefault());
-  wnote.textContent = "The sign-up form opens shortly. Until then, follow Studyo on YouTube to hear first.";
-}
+// The waitlist form posts straight into the Google Form behind it (same questions, same responses sheet), so people never leave the page.
+const WL_POST = "https://docs.google.com/forms/d/e/1FAIpQLSeFDmoyq9p4M3BNuygK65QDM3XBvq17HDxBuGvS35ytOpeFOw/formResponse";
+const WL = { email: "emailAddress", role: "entry.1803189097", other: "entry.1803189097.other_option_response", make: "entry.1288576585", topic: "entry.2002341640" };
+const wlForm = document.getElementById("wl-form"), wlNote = document.getElementById("wl-note"), wlEmail = document.getElementById("wl-email");
+const wlRoles = document.getElementById("wl-roles"), wlOtherBox = document.getElementById("wl-other-box"), wlOther = document.getElementById("wl-other");
+const wlSay = (html, bad) => { wlNote.innerHTML = html; wlNote.style.color = bad ? "var(--nv-terra)" : ""; };
+wlOtherBox.addEventListener("change", () => { wlOther.hidden = !wlOtherBox.checked; if (wlOtherBox.checked) wlOther.focus(); });
+const WL_PICK = "Please pick at least one: teacher, student, tutor…";
+const wlCalm = () => wlSay("We only use your email to tell you about the engine.");   // a fixed mistake clears its warning
+wlRoles.addEventListener("change", () => { if (wlRoles.querySelector("input:checked")) { wlRoles.classList.remove("bad"); if (wlEmail.getAttribute("aria-invalid") !== "true") wlCalm(); } });
+wlEmail.addEventListener("input", () => { if (wlEmail.getAttribute("aria-invalid") === "true") { wlEmail.removeAttribute("aria-invalid"); if (wlRoles.classList.contains("bad")) wlSay(WL_PICK, true); else wlCalm(); } });
+document.getElementById("soon-ask").addEventListener("click", () => setTimeout(() => document.getElementById("wl-topic").focus({ preventScroll: true }), 500));
+wlForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = wlEmail.value.trim(), roles = [...wlRoles.querySelectorAll("input[type=checkbox]:checked")].map(x => x.value);
+  const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  wlEmail.setAttribute("aria-invalid", String(!okEmail)); wlRoles.classList.toggle("bad", !roles.length);
+  if (!okEmail) { wlSay("Please enter your email.", true); wlEmail.focus(); return; }
+  if (!roles.length) { wlSay(WL_PICK, true); return; }
+  const body = new URLSearchParams(); body.append(WL.email, email); roles.forEach(r => body.append(WL.role, r));
+  if (roles.includes("__other_option__")) body.append(WL.other, wlOther.value.trim() || "Other");
+  body.append(WL.make, document.getElementById("wl-make").value.trim()); body.append(WL.topic, document.getElementById("wl-topic").value.trim());
+  const btn = document.getElementById("wl-submit"); btn.disabled = true; btn.textContent = "Joining…";
+  try {
+    await fetch(WL_POST, { method: "POST", mode: "no-cors", body });   // Google answers without CORS headers: the reply can't be read, a sent request is a sign-up
+    wlForm.hidden = true; document.getElementById("wl-title").hidden = true; const done = document.getElementById("wl-done"); done.hidden = false; done.focus();
+  } catch (err) {
+    btn.disabled = false; btn.textContent = "Join the waitlist";
+    wlSay('That didn’t go through. Please try again, or <a href="' + WAITLIST_URL + '" target="_blank" rel="noopener">use the Google Form</a>.', true);
+  }
+});
 </script>
 
-<!-- Visit counter: GoatCounter (no cookies, no personal data) - https://studyo.goatcounter.com -->
-<script data-goatcounter="https://studyo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
