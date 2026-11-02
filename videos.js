@@ -4,5 +4,5 @@ window.STUDYO_IDS = {"cs-1-stacks": "eb9P8UzTB9I", "cs-2-hash-tables": "-8WBNITk
 // public, but "allow embedding" is off on YouTube: a short plays its local copy, a longer lesson links out
 window.STUDYO_LINKONLY = {"maths-06-best-hub": true};
 // [views, likes] of each lesson's current video (YouTube Analytics, about 2 days behind): the page shows the most watched first
-window.STUDYO_VIEWS = {"cs-1-stacks": [6, 0], "cs-2-hash-tables": [3, 0], "cs-3-recursion": [5, 0], "cs-4-big-o": [1, 0], "cs-5-bfs": [3, 0], "cs-6-binary-search": [5, 0], "maths-01-water-tank": [10, 0], "maths-02-fastest-slope": [33, 0], "maths-03-one-switch": [5, 0], "maths-04-lifeguard": [18, 1], "maths-05-medians": [103, 1], "maths-06-best-hub": [7, 0], "maths-07-doughnut": [15, 0]};
-window.STUDYO_IDS_AT = "2026-11-02T13:03:55Z";
+window.STUDYO_VIEWS = {"cs-1-stacks": [17, 0], "cs-2-hash-tables": [17, 0], "cs-3-recursion": [27, 0], "cs-4-big-o": [4, 0], "cs-5-bfs": [15, 0], "cs-6-binary-search": [18, 0], "long-bfs": [2, 0], "long-binary-search": [2, 0], "long-le-chatelier": [1, 0], "long-recursion": [5, 0], "long-shm": [19, 1], "long-sliding-window": [5, 0], "maths-01-water-tank": [11, 0], "maths-02-fastest-slope": [79, 0], "maths-03-one-switch": [7, 0], "maths-04-lifeguard": [38, 1], "maths-05-medians": [174, 3], "maths-06-best-hub": [27, 0], "maths-07-doughnut": [64, 1]};
+window.STUDYO_IDS_AT = "2026-11-02T22:27:55Z";
