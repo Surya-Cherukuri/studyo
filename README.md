@@ -1,6 +1,6 @@
 # Studyo website
 
-Live at https://surya-cherukuri.github.io/studyo/ . The public Studyo landing page: free one-minute lessons that play in the page, how they're made, and the engine waitlist.
+Live at https://studyo.live (the old address surya-cherukuri.github.io/studyo forwards there). The public Studyo landing page: free one-minute lessons that play in the page, how they're made, and the engine waitlist.
 Plain HTML, no build step. Every lesson plays from YouTube by its video id (the `yt:` values in `LESSONS` and the `id:` values in `LONG` inside `index.html`),
 so thumbnail and video changes made on YouTube show up here by themselves; the titles on the page are written in `index.html`.
 `videos/` and `posters/` hold local copies: the hero plays `videos/cs-5-bfs.mp4`, and a lesson without a YouTube id plays its local file.
@@ -26,7 +26,7 @@ kept in sync (the list is tools/site/lessons.json in physics-videos); new YouTub
    ```
 
 3. In the repository: Settings, Pages, Source "Deploy from a branch", branch `main`, folder `/ (root)`, Save.
-   A minute later the site is at https://surya-cherukuri.github.io/studyo/
+   A minute later the site is at https://studyo.live (custom domain: the CNAME file in this repo + the DNS records at GoDaddy)
 
 ## Waitlist
 
