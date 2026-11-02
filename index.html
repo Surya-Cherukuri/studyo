@@ -115,7 +115,7 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .len-item .bar i { display: block; height: 100%; border-radius: 4px; }
 .len-item h4 { margin: 4px 0 0; font-family: var(--display); font-weight: 800; font-size: 18px; }
 .len-item p { color: var(--muted); font-size: 15px; line-height: 1.45; }
-.wide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.wide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .long { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .ltile { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); display: grid; align-content: space-between; padding: 20px; text-decoration: none; color: var(--ink); max-width: 100%; width: 100%; cursor: pointer; font: inherit; text-align: left; }
 .ltile .stripe { position: absolute; inset: 0 auto 0 0; width: 10px; }
@@ -247,7 +247,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .soon-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 480px) { .soon-list { grid-template-columns: minmax(0, 1fr); } .console .row { grid-template-columns: minmax(0, 1fr); gap: 8px; } .pace { grid-template-columns: minmax(0, 1fr) auto; } .pace .end { display: none; } .motif { display: none; } }
-@media (max-width: 620px) { .wide { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1000px) { .wide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) {   /* the lessons become a row you swipe, like the shorts */
+  .wide { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 12px; overscroll-behavior-x: contain; }
+  .wide .long { flex: 0 0 84%; scroll-snap-align: start; }
+}
 @media (max-width: 1000px) {   /* a shelf you swipe: every lesson stays in one row, nothing sits alone */
   .grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 12px; overscroll-behavior-x: contain; }
   .card { flex: 0 0 152px; scroll-snap-align: start; }
@@ -277,7 +281,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <a class="btn primary" href="#lessons">Watch the lessons</a>
         <a class="btn ghost" href="#engine">Make your own</a>
       </div>
-      <p class="facts"><span><b>15</b> lessons here</span><span>from <b>1-minute</b> shorts</span><span>to <b>15-minute</b> walkthroughs</span><span>up to <b>60 minutes</b> when a topic needs it</span></p>
+      <p class="facts"><span><b>18</b> lessons here</span><span>from <b>1-minute</b> shorts</span><span>to <b>15-minute</b> walkthroughs</span><span>up to <b>60 minutes</b> when a topic needs it</span></p>
     </div>
     <div class="phone-col">
       <div class="phone"><video id="hero-video" src="videos/hero-reel.mp4" poster="posters/hero-reel.jpg" autoplay muted loop playsinline aria-label="A silent reel of moments from the lessons: a work queue, search typeahead, breadth-first search, hash tables, recursion, binary search and maths proofs"></video></div>
@@ -301,7 +305,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       </div>
 
       <div class="shelf">
-        <div class="shelf-title"><h3>Lessons</h3><span class="count">2 lessons · 3–4 min each · new on YouTube</span></div>
+        <div class="shelf-title"><h3>Lessons</h3><span class="count">5 lessons · 3–5 min each · new on YouTube</span></div>
         <p>A full topic in a few minutes. Walkthroughs of 10 to 15 minutes and full-length lessons of up to an hour are on the way.</p>
         <div class="wide" data-long></div>
       </div>
@@ -444,8 +448,11 @@ const IDS = window.STUDYO_IDS || {};
 // public on YouTube but with embedding switched off there: a short plays its local copy, a longer lesson links out to YouTube
 const LINKONLY = window.STUDYO_LINKONLY || {};
 const LONG = [
-  { slug: "long-shm", id: "s2WsCla6PRk", k: "Physics · Class 11", title: "Simple harmonic motion, explained visually", sub: "Springs, circles and pendulums: one motion, three pictures.", len: "3:40", tone: "var(--terra)" },
-  { slug: "long-sliding-window", id: "J_Q3j_x0vTs", k: "Coding · LeetCode pattern", title: "The sliding window technique", sub: "From O(n·k) to O(n) by sliding instead of re-adding. In Python.", len: "3:35", tone: "var(--sapphire)" }
+  { slug: "long-recursion", id: "qZZtRI1LUKw", k: "Coding · DSA for beginners", title: "Recursion, explained visually", sub: "How the call stack keeps track when a function calls itself. In Python.", len: "4:52", tone: "var(--teal)" },
+  { slug: "long-binary-search", id: "difMPFNhVAE", k: "Coding · DSA for beginners", title: "Binary search, explained visually", sub: "One number in a million in about 20 checks: look in the middle, drop half.", len: "4:46", tone: "var(--gold)" },
+  { slug: "long-bfs", id: "rc_5LU1GQ2w", k: "Coding · Graphs", title: "Breadth-first search, explained visually", sub: "The shortest way out of a maze, found by exploring in rings.", len: "4:54", tone: "var(--terra)" },
+  { slug: "long-sliding-window", id: "J_Q3j_x0vTs", k: "Coding · LeetCode pattern", title: "The sliding window technique", sub: "From O(n·k) to O(n) by sliding instead of re-adding. In Python.", len: "3:35", tone: "var(--sapphire)" },
+  { slug: "long-shm", id: "0Y4hQEIXHI0", k: "Physics · Class 11", title: "Simple harmonic motion, explained visually", sub: "Springs, circles and pendulums: one motion, three pictures.", len: "4:48", tone: "var(--teal)" }
 ];
 
 // The Google Form link for the engine waitlist. Leave it empty until the form exists: the button then says the waitlist opens soon.
