@@ -210,7 +210,7 @@ nav a.yt { color: var(--ink); border: 1.5px solid var(--line); padding: 6px 14px
 .seg button:hover { color: var(--nv-ink); }
 .seg button[aria-pressed="true"] { color: #fff; background: rgba(122, 162, 238, .18); border-color: var(--nv-accent); box-shadow: 0 0 18px -6px rgba(122, 162, 238, .8); }
 .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-.sw-min { background: #F4F6FA; } .sw-wb { background: #fff linear-gradient(rgba(43, 88, 166, .5) 1px, transparent 1px) 0 0 / 4px 4px; } .sw-brand { background: linear-gradient(135deg, var(--nv-terra), var(--nv-accent)); }
+.sw-min { background: #F4F6FA; } .sw-dark { background: linear-gradient(135deg, #10141c, #1d2433); } .sw-topic { background: linear-gradient(135deg, #2a1033, #c79a3a); } .sw-wb { background: #fff linear-gradient(rgba(43, 88, 166, .5) 1px, transparent 1px) 0 0 / 4px 4px; } .sw-brand { background: linear-gradient(135deg, var(--nv-terra), var(--nv-accent)); }
 .ar { display: inline-block; border: 1.5px solid currentColor; border-radius: 2px; } .ar-916 { width: 9px; height: 15px; } .ar-169 { width: 17px; height: 10px; }
 .pace { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
 .pace .end { font-size: 12px; color: var(--nv-muted); }
@@ -394,7 +394,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <p class="lede">We're turning the engine behind these videos into a tool. You give it a topic, make it yours, check the script, and get a finished lesson. We're opening it to a small group first.</p>
         <ul>
           <li>From a 1-minute short to a 60-minute lesson with chapters</li>
-          <li>Your voice, narration pace, teaching style and look</li>
+          <li>Pick a look: a theme for every subject and style, or one built around your topic, like aqua glass for a water tank or velvet and gold for a ring</li>
+          <li>Make it yours: voice, pace, teaching style, level, examples and length</li>
           <li>Maths, physics, chemistry, code and system design for now, with more subjects as people ask for them</li>
           <li>You read and approve the script before anything is made</li>
         </ul>
@@ -411,7 +412,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <div class="row" data-group="voice"><span class="lab">Voice</span><div class="seg"><button type="button" aria-pressed="true">Warm female</button><button type="button" aria-pressed="false">Calm male</button><button type="button" aria-pressed="false">More voices</button></div></div>
         <div class="row"><span class="lab"><label for="pace">Pace</label></span><div class="pace"><span class="end">Slower</span><input type="range" id="pace" min="0.8" max="1.3" step="0.05" value="1"><span class="end">Faster</span><output id="pace-out" for="pace">1.0×</output></div></div>
         <div class="row" data-group="style"><span class="lab">Style</span><div class="seg"><button type="button" aria-pressed="true">Friendly tutor</button><button type="button" aria-pressed="false">Exam-crisp</button><button type="button" aria-pressed="false">Storyteller</button></div></div>
-        <div class="row" data-group="look"><span class="lab">Look</span><div class="seg"><button type="button" aria-pressed="true"><i class="sw sw-min" aria-hidden="true"></i>Clean minimal</button><button type="button" aria-pressed="false"><i class="sw sw-wb" aria-hidden="true"></i>Whiteboard</button><button type="button" aria-pressed="false"><i class="sw sw-brand" aria-hidden="true"></i>Your colours</button></div></div>
+        <div class="row" data-group="look"><span class="lab">Look</span><div class="seg"><button type="button" aria-pressed="true"><i class="sw sw-min" aria-hidden="true"></i>Clean minimal</button><button type="button" aria-pressed="false"><i class="sw sw-wb" aria-hidden="true"></i>Whiteboard</button><button type="button" aria-pressed="false"><i class="sw sw-dark" aria-hidden="true"></i>Dark editor</button><button type="button" aria-pressed="false"><i class="sw sw-topic" aria-hidden="true"></i>Topic world</button><button type="button" aria-pressed="false"><i class="sw sw-brand" aria-hidden="true"></i>Your colours</button></div></div>
         <div class="row" data-group="format"><span class="lab">Format</span><div class="seg"><button type="button" aria-pressed="true"><i class="ar ar-916" aria-hidden="true"></i>Phone short</button><button type="button" aria-pressed="false"><i class="ar ar-169" aria-hidden="true"></i>Classroom widescreen</button></div></div>
         <div class="row" data-group="length"><span class="lab">Length</span><div class="seg"><button type="button" aria-pressed="true">1 min</button><button type="button" aria-pressed="false">5 min</button><button type="button" aria-pressed="false">15 min</button><button type="button" aria-pressed="false">60 min</button></div></div>
         <p class="summary" id="summary" aria-live="polite"></p>
