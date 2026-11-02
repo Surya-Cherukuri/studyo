@@ -39,3 +39,7 @@ Add a line to `LESSONS` (a short) or `LONG` (a longer video) in `index.html` wit
 ## Later
 
 A custom domain goes in Settings, Pages, Custom domain.
+
+## Visits
+
+Counted by GoatCounter (no cookies, no personal data): https://studyo.goatcounter.com (the script tag at the end of `index.html`).
