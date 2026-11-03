@@ -327,9 +327,14 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       </div>
 
       <div class="shelf">
-        <div class="shelf-title"><h3>Lessons</h3><span class="count">6 lessons · 3–5 min each · new on YouTube</span></div>
-        <p>A full topic in a few minutes. Walkthroughs of 10 to 15 minutes and full-length lessons of up to an hour are on the way.</p>
-        <div class="wide" data-long></div>
+        <div class="shelf-title"><h3>LeetCode, Visually</h3><span class="count">1 problem · full walkthrough · new on YouTube</span></div>
+        <p>The classic hard problems, picture first, then the Python running line by line beside a dry run. Code ready to paste into LeetCode.</p>
+        <div class="wide" data-long="lc"></div>
+      </div>
+      <div class="shelf">
+        <div class="shelf-title"><h3>Lessons</h3><span class="count">7 lessons · 3–5 min each · new on YouTube</span></div>
+        <p>A full topic in a few minutes. Full-length lessons of up to an hour are on the way.</p>
+        <div class="wide" data-long="main"></div>
       </div>
 
       <div class="shelf">
@@ -484,6 +489,8 @@ const IDS = window.STUDYO_IDS || {};
 // public on YouTube but with embedding switched off there: a short plays its local copy, a longer lesson links out to YouTube
 const LINKONLY = window.STUDYO_LINKONLY || {};
 const LONG = [
+  { slug: "long-leetcode-4", shelf: "lc", id: "MLEbSIMoEpc", k: "LeetCode 4 · Hard", title: "Median of Two Sorted Arrays", sub: "Cut both lists, check four numbers, binary search the cut. A full dry run and Python you can paste into LeetCode.", len: "12:08", tone: "var(--terra)" },
+  { slug: "long-hash-tables", id: "4OzunSBDw9k", k: "Coding · DSA for beginners", title: "Hash tables, explained visually", sub: "How a lookup takes about one step: hashing, buckets, collisions and resizing. In Python.", len: "4:42", tone: "var(--sapphire)" },
   { slug: "long-recursion", id: "qZZtRI1LUKw", k: "Coding · DSA for beginners", title: "Recursion, explained visually", sub: "How the call stack keeps track when a function calls itself. In Python.", len: "4:52", tone: "var(--teal)" },
   { slug: "long-binary-search", id: "difMPFNhVAE", k: "Coding · DSA for beginners", title: "Binary search, explained visually", sub: "One number in a million in about 20 checks: look in the middle, drop half.", len: "4:46", tone: "var(--gold)" },
   { slug: "long-bfs", id: "rc_5LU1GQ2w", k: "Coding · Graphs", title: "Breadth-first search, explained visually", sub: "The shortest way out of a maze, found by exploring in rings.", len: "4:54", tone: "var(--terra)" },
@@ -563,7 +570,7 @@ if (Object.keys(VIEWS).length) {
   LESSONS.sort(byViews); LONG.sort(byViews);   // sort keeps ties in their written order
   // say so only on shelves where YouTube has sent numbers for at least one lesson
   const counted = list => list.some(l => l.slug in VIEWS);
-  [["[data-long]", LONG], ['[data-shelf="cs"]', LESSONS.filter(l => l.shelf === "cs")], ['[data-shelf="ma"]', LESSONS.filter(l => l.shelf === "ma")]].forEach(([sel, list]) => {
+  [['[data-long="main"]', LONG.filter(l => (l.shelf || "main") === "main")], ['[data-long="lc"]', LONG.filter(l => l.shelf === "lc")], ['[data-shelf="cs"]', LESSONS.filter(l => l.shelf === "cs")], ['[data-shelf="ma"]', LESSONS.filter(l => l.shelf === "ma")]].forEach(([sel, list]) => {
     const c = counted(list) && document.querySelector(sel)?.parentElement.querySelector(".shelf-title .count");
     if (c) c.textContent += " · most watched first";
   });
@@ -608,7 +615,7 @@ LONG.forEach(l => {
   const card = el("article", { class: "long" }, [tile]);
   if (embed) { card.appendChild(el("span", { class: "k", text: l.k })); card.appendChild(el("h4", { text: l.title })); }
   card.appendChild(el("p", { class: "sub", text: l.sub }));
-  document.querySelector("[data-long]").appendChild(card);
+  document.querySelector('[data-long="' + (l.shelf || "main") + '"]').appendChild(card);
 });
 
 if (reduced) { hero.removeAttribute("autoplay"); hero.pause(); }
