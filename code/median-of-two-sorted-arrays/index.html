@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LeetCode 4: Median of Two Sorted Arrays · Python solution · Studyo</title>
+<meta name="description" content="Copy-paste Python solution for LeetCode 4, Median of Two Sorted Arrays, with the idea in one paragraph. From the Studyo visual lesson.">
+<link rel="canonical" href="https://studyo.live/code/median-of-two-sorted-arrays/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root { --paper:#F4F6FA; --surface:#FFFFFF; --sunk:#E9EEF6; --ink:#14213D; --muted:#5E6B85; --line:#D8DFEB; --sapphire:#2B58A6; --teal:#168A8F; --terra:#C9533A;
+  --code-bg:#0F1729; --code-ink:#E8EEF9; --code-mut:#9AA8C3;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif; --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace }
+@media (prefers-color-scheme: dark) { :root { --paper:#0B1222; --surface:#121C33; --sunk:#18233D; --ink:#E8EEF9; --muted:#9AA8C3; --line:rgba(160,186,235,.16); --sapphire:#7AA2EE; --teal:#3DB6BA; --terra:#EC8468; color-scheme: dark } }
+* { box-sizing: border-box } body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.6 var(--body) }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right)) 64px max(16px, env(safe-area-inset-left)) }
+a { color: var(--sapphire) } .top { display:flex; justify-content:space-between; align-items:center; gap:12px; font-weight:700 } .top a { text-decoration:none }
+.eyebrow { font: 700 13px/1 var(--body); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:28px }
+h1 { font: 800 clamp(30px,5vw,44px)/1.1 var(--display); margin: 8px 0 12px; text-wrap: balance } .lvl { color: var(--terra) }
+.what { color: var(--muted); max-width: 65ch } .watch { display:inline-block; margin-top:10px; font-weight:700 }
+section { margin-top: 30px } h2 { font: 800 24px/1.2 var(--display); margin: 0 0 4px } .cx { font: 600 14px var(--mono); color: var(--teal) }
+.idea { max-width: 68ch; margin: 8px 0 12px }
+.code { position: relative; background: var(--code-bg); color: var(--code-ink); border-radius: 14px; overflow: hidden }
+.code pre { margin:0; padding: 18px 20px; overflow-x: auto; font: 14.5px/1.6 var(--mono); tab-size: 4 }
+.copy { position:absolute; top:10px; right:10px; font: 700 13px var(--body); background: rgba(255,255,255,.1); color: var(--code-ink); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 6px 10px; cursor: pointer }
+.copy:focus-visible { outline: 2px solid var(--teal) }
+table { border-collapse: collapse; margin-top: 8px; font: 14.5px var(--mono) } td { padding: 6px 14px 6px 0; border-bottom: 1px solid var(--line) }
+footer { margin-top: 44px; color: var(--muted); font-size: 15px }
+</style></head><body><div class="wrap">
+<div class="top"><a href="/">Studyo</a><a href="/#waitlist">Engine waitlist</a></div>
+<div class="eyebrow">LeetCode 4 · Python 3 · ready to paste</div>
+<h1>Median of Two Sorted Arrays <span class="lvl">· Hard</span></h1>
+<p class="what">Two sorted lists; return the median of all their numbers together, in O(log(m + n)) time.</p><a class="watch" href="https://youtu.be/MLEbSIMoEpc">▶ Watch the visual lesson</a>
+<section><h2>Binary search on the cut</h2><div class="cx">O(log(min(m, n))) time · O(1) space</div><p class="idea">Cut both lists so the left halves hold half of all numbers. The cut is right when the four numbers around it are in order; binary search the cut in the shorter list.</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre><code>from typing import List
+from math import inf
+class Solution:
+    def findMedianSortedArrays(self,
+            nums1: List[int],
+            nums2: List[int]) -&gt; float:
+        a, b = nums1, nums2
+        if len(a) &gt; len(b):
+            a, b = b, a
+        m, n = len(a), len(b)
+        half = (m + n + 1) // 2
+        lo, hi = 0, m
+        while lo &lt;= hi:
+            i = (lo + hi) // 2
+            j = half - i
+            a_left = a[i - 1] if i &gt; 0 else -inf
+            a_right = a[i] if i &lt; m else inf
+            b_left = b[j - 1] if j &gt; 0 else -inf
+            b_right = b[j] if j &lt; n else inf
+            if a_left &lt;= b_right and b_left &lt;= a_right:
+                left = max(a_left, b_left)
+                if (m + n) % 2 == 1:
+                    return left
+                right = min(a_right, b_right)
+                return (left + right) / 2
+            elif a_left &gt; b_right:
+                hi = i - 1
+            else:
+                lo = i + 1</code></pre></div></section>
+<section><h2>Check</h2><table><tr><td>nums1 = [1,3], nums2 = [2]</td><td>→ 2.0</td></tr><tr><td>nums1 = [1,2], nums2 = [3,4]</td><td>→ 2.5</td></tr></table></section>
+<footer>These are the exact lines the video runs, tested against a brute-force answer. <a href="/">More visual lessons on studyo.live</a>.</footer>
+</div><script>
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => { const t = b.parentElement.querySelector('code').textContent;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; } catch (e) { const r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector('code')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected: press Ctrl+C'; }
+  setTimeout(() => b.textContent = 'Copy', 1800); }));
+</script></body></html>
