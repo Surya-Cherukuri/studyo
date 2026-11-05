@@ -70,4 +70,6 @@ class Solution:
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => { const t = b.parentElement.querySelector('code').textContent;
   try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; } catch (e) { const r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector('code')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected: press Ctrl+C'; }
   setTimeout(() => b.textContent = 'Copy', 1800); }));
-</script></body></html>
+</script><!-- Visit counter: GoatCounter (no cookies, no personal data) - https://studyo.goatcounter.com -->
+<script data-goatcounter="https://studyo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>
