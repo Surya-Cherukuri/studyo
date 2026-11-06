@@ -2,7 +2,7 @@
 // (null = not public right now: a short plays its local copy, a longer lesson is hidden). Do not edit by hand.
 window.STUDYO_IDS = {"cs-1-stacks": "eb9P8UzTB9I", "cs-2-hash-tables": "-8WBNITk1Aw", "cs-3-recursion": "AZPGp3lv2U8", "cs-4-big-o": "lrdacfkKY_E", "cs-5-bfs": "L6P8tP_8M9M", "cs-6-binary-search": "dXPoeyTE5a0", "long-bfs": null, "long-binary-search": "difMPFNhVAE", "long-hash-tables": "4OzunSBDw9k", "long-le-chatelier": "sC3trMSoRUI", "long-leetcode-4": "MLEbSIMoEpc", "long-recursion": "qZZtRI1LUKw", "long-shm": "0Y4hQEIXHI0", "long-sliding-window": "J_Q3j_x0vTs", "maths-01-water-tank": "nHzsFbFrmVw", "maths-02-fastest-slope": "079Gk9alo8M", "maths-03-one-switch": "NUpA3lPzAhU", "maths-04-lifeguard": "QluvMlT1ojk", "maths-05-medians": "Cg-ysrGsepY", "maths-06-best-hub": "sT7pLjvq9qo", "maths-07-doughnut": "J5pdmTE13oU"};
 // public, but "allow embedding" is off on YouTube: a short plays its local copy, a longer lesson links out
-window.STUDYO_LINKONLY = {"maths-06-best-hub": true};
+window.STUDYO_LINKONLY = {};
 // [views, likes] of each lesson's current video (YouTube Analytics, about 2 days behind): the page shows the most watched first
 window.STUDYO_VIEWS = {"cs-1-stacks": [52, 0], "cs-2-hash-tables": [57, 0], "cs-3-recursion": [65, 0], "cs-4-big-o": [15, 0], "cs-5-bfs": [50, 0], "cs-6-binary-search": [53, 0], "long-binary-search": [2, 0], "long-hash-tables": [8, 0], "long-le-chatelier": [9, 0], "long-leetcode-4": [47, 0], "long-recursion": [11, 0], "long-shm": [37, 1], "long-sliding-window": [22, 0], "maths-01-water-tank": [16, 0], "maths-02-fastest-slope": [81, 0], "maths-03-one-switch": [9, 0], "maths-04-lifeguard": [42, 1], "maths-05-medians": [265, 3], "maths-06-best-hub": [41, 0], "maths-07-doughnut": [79, 1]};
-window.STUDYO_IDS_AT = "2026-11-06T00:04:48Z";
+window.STUDYO_IDS_AT = "2026-11-06T04:35:19Z";
