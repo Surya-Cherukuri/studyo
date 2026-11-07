@@ -4,5 +4,5 @@ window.STUDYO_IDS = {"cs-1-stacks": "eb9P8UzTB9I", "cs-2-hash-tables": "-8WBNITk
 // public, but "allow embedding" is off on YouTube: a short plays its local copy, a longer lesson links out
 window.STUDYO_LINKONLY = {};
 // [views, likes] of each lesson's current video (YouTube Analytics, about 2 days behind): the page shows the most watched first
-window.STUDYO_VIEWS = {"cs-1-stacks": [53, 0], "cs-2-hash-tables": [64, 0], "cs-3-recursion": [66, 0], "cs-4-big-o": [16, 0], "cs-5-bfs": [56, 0], "cs-6-binary-search": [55, 0], "long-binary-search": [2, 0], "long-hash-tables": [8, 0], "long-le-chatelier": [9, 0], "long-leetcode-4": [69, 0], "long-recursion": [11, 0], "long-shm": [37, 1], "long-sliding-window": [23, 0], "maths-01-water-tank": [17, 0], "maths-02-fastest-slope": [81, 0], "maths-03-one-switch": [9, 0], "maths-04-lifeguard": [43, 1], "maths-05-medians": [274, 3], "maths-06-best-hub": [40, 0], "maths-07-doughnut": [85, 1]};
+window.STUDYO_VIEWS = {};
 window.STUDYO_IDS_AT = "2026-11-06T10:21:19Z";
